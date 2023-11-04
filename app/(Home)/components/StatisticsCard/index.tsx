@@ -1,11 +1,24 @@
-import { Text, View } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 
-export function StatisticsCard() {
+import * as S from "./styles";
+
+type Props = TouchableOpacityProps &
+  S.StatisticsButtonStyleProps & {
+    title: string;
+    subtitle: string;
+  };
+
+export function StatisticsCard({
+  type = "SUCCESS",
+  title,
+  subtitle,
+  ...rest
+}: Props) {
   return (
-    <>
-      <View>
-        <Text>I'm the Statistics Card</Text>
-      </View>
-    </>
+    <S.StatisticsButton type={type} {...rest}>
+      <S.OpenIcon size={24} />
+      <S.Title>{title}</S.Title>
+      <S.SubTitle>{subtitle}</S.SubTitle>
+    </S.StatisticsButton>
   );
 }
