@@ -1,8 +1,12 @@
 import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
+import { MealCard } from "./components/MealCard";
+import { StatisticsCard } from "./components/StatisticsCard";
+import { useTheme } from "styled-components/native";
 
 export default function Home() {
   const navigation = useRouter();
+  const { COLORS } = useTheme();
   return (
     <>
       <View
@@ -10,10 +14,11 @@ export default function Home() {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "lightblue",
+          backgroundColor: COLORS.WHITE,
         }}
       >
-        <Text>I'm the freaking Home Screen</Text>
+        <MealCard />
+        <StatisticsCard />
         <TouchableOpacity
           onPress={() => navigation.push("/(Statistics)")}
           style={{
