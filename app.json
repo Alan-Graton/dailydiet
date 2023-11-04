@@ -5,10 +5,10 @@
     "scheme": "dailydiet",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/src/assets/Logo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "auto",
     "splash": {
-      "image": "./app/src/assets/Logo.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#CBE4B4"
     },
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/src/assets/Logo.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#CBE4B4"
       }
     },

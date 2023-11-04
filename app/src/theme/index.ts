@@ -18,6 +18,13 @@ export const THEME = {
 
     WHITE: "#FFFFFF",
   },
-  FONT_SIZE: {},
+  FONT_SIZE: {
+    XSM: 12,
+    SM: 14,
+    MD: 16,
+    XMD: 18,
+    LG: 24,
+    XLG: 32,
+  },
   FONT_FAMILY: {},
 };
