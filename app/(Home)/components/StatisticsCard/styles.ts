@@ -21,7 +21,6 @@ export const StatisticsButton = styled(
 
   border-radius: 8px;
 
-
   align-items: center;
 
   padding: 12px;
