@@ -3,10 +3,9 @@
   "compilerOptions": {
     "strict": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["app/src/*"]
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

@@ -5,15 +5,16 @@
     "scheme": "dailydiet",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./app/src/assets/Logo.png",
+    "userInterfaceStyle": "auto",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/src/assets/Logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#CBE4B4"
     },
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "tsconfigPaths": true
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -21,9 +22,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./app/src/assets/Logo.png",
+        "backgroundColor": "#CBE4B4"
       }
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#CBE4B4",
+      "translucent": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
