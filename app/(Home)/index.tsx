@@ -39,7 +39,11 @@ export default function Home() {
 
   return (
     <S.Container>
-      <StatisticsCard title="90,86%" subtitle="das refeições dentro da dieta" />
+      <StatisticsCard
+        title="90,86%"
+        subtitle="das refeições dentro da dieta"
+        onPress={() => navigation.push("/(Statistics)")}
+      />
       <S.ActionForm>
         <S.ActionFormTitle>Refeições</S.ActionFormTitle>
         <AppIconButton icon="add" title="Nova refeição" color={COLORS.WHITE} />
