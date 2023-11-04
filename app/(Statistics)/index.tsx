@@ -1,17 +1,12 @@
 import { useRouter } from "expo-router";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+
+import * as S from "./styles";
 
 export default function Statistics() {
   const navigation = useRouter();
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "lightblue",
-      }}
-    >
+    <S.Container>
       <Text>I'm the big F-ing Statistics Screen</Text>
       <TouchableOpacity
         onPress={() => navigation.back()}
@@ -25,6 +20,6 @@ export default function Statistics() {
       >
         <Text style={{ fontSize: 26 }}>I'll be back</Text>
       </TouchableOpacity>
-    </View>
+    </S.Container>
   );
 }
