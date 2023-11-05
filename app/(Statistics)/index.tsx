@@ -23,10 +23,12 @@ export default function Statistics() {
         }}
       />
       <S.Title>Estatísticas gerais</S.Title>
-      <BestMealSequence />
-      <MealCounter />
-      <InDietMeals />
-      <OffDietMeals />
+      <S.Content>
+        <BestMealSequence />
+        <MealCounter />
+        <InDietMeals />
+        <OffDietMeals />
+      </S.Content>
     </S.Container>
   );
 }
