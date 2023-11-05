@@ -3,9 +3,12 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
 
-  padding: 10px;
+  padding: 15px;
+
+  height: 100px;
 
   align-items: center;
+  justify-content: space-evenly;
 
   border-radius: 8px;
 `;
