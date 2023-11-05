@@ -11,8 +11,6 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const Content = styled.View`
-  background-color: red;
-
   padding: 10px;
 
   gap: 15px;
