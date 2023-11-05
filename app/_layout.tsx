@@ -8,7 +8,7 @@ export default function RootLayout() {
   return (
     <>
       <ThemeProvider theme={THEME}>
-        <Slot initialRouteName="(Home)" />
+        <Slot />
         <StatusBar animated translucent backgroundColor={THEME.COLORS.WHITE} />
       </ThemeProvider>
     </>
