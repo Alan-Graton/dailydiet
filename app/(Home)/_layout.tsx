@@ -1,7 +1,7 @@
 import { Stack } from "expo-router/stack";
 
-import UserProfilePic from "../src/assets/UserProfilePic.png";
-import AppLogo from "../src/assets/Logo.png";
+import UserProfilePic from "@/assets/UserProfilePic.png";
+import AppLogo from "@/assets/Logo.png";
 
 import { Logo, ProfilePic } from "./styles";
 

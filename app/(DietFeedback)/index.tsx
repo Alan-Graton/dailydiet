@@ -1,17 +1,15 @@
 import { useRouter } from "expo-router";
+
 // Application Components
-import { AppButton } from "../src/components/AppButton";
+import { AppButton } from "@/components/AppButton";
 
 // Constants
-import {
-  SuccessSubTitle,
-  SuccessTitle,
-} from "../src/constants/SuccessDietFeedback";
-import { ErrorSubTitle, ErrorTitle } from "../src/constants/ErrorDietFeedback";
+import { SuccessSubTitle, SuccessTitle } from "@/constants/SuccessDietFeedback";
+import { ErrorSubTitle, ErrorTitle } from "@/constants/ErrorDietFeedback";
 
 // Styles
-import GoodFeedbackImage from "../src/assets/Good_Feedback.png";
-import BadFeedbackImage from "../src/assets/Bad_Feedback.png";
+import GoodFeedbackImage from "@/assets/Good_Feedback.png";
+import BadFeedbackImage from "@/assets/Bad_Feedback.png";
 import * as S from "./styles";
 
 type Props = {

@@ -3,8 +3,8 @@ import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
 
 // Application Components
-import { AppIconButton } from "../src/components/AppIconButton";
-import { AppEmptyList } from "../src/components/AppEmptyList";
+import { AppIconButton } from "@/components/AppIconButton";
+import { AppEmptyList } from "@/components/AppEmptyList";
 
 // Screen Components
 import { MealCard } from "./components/MealCard";

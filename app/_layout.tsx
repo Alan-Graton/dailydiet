@@ -2,7 +2,7 @@ import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 // Styles
 import { ThemeProvider } from "styled-components/native";
-import { THEME } from "./src/theme";
+import { THEME } from "@/theme";
 
 export default function RootLayout() {
   return (
