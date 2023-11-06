@@ -7,6 +7,8 @@ export const Container = styled(SafeAreaView)`
 
   align-items: center;
 
+  padding: 16px;
+
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
@@ -15,6 +17,16 @@ export const Content = styled.View`
 
   gap: 15px;
 `;
+
+export const GroupFeedbackCounter = styled.View`
+  flex-direction: row;
+
+  gap: 10px;
+
+  align-items: center;
+  justify-content: center;
+`
+
 
 export const Title = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;

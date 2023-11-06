@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import { Header } from "./components/Header";
 import { BestMealSequence } from "./components/BestMealSequence";
 import { MealCounter } from "./components/MealCounter";
+import { DietFeedbackCounter } from "./components/DietFeedbackCounter";
 
 // Styles
 import * as S from "./styles";
@@ -24,6 +25,10 @@ export default function Statistics() {
       <S.Content>
         <BestMealSequence />
         <MealCounter />
+        <S.GroupFeedbackCounter>
+          <DietFeedbackCounter title="37" />
+          <DietFeedbackCounter title="10" type="ERROR" />
+        </S.GroupFeedbackCounter>
       </S.Content>
     </S.Container>
   );
