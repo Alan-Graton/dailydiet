@@ -6,12 +6,13 @@ type Props = {
   icon: keyof typeof Ionicons.glyphMap;
   color: string;
   title: string;
+  handleOnPress: () => void;
 };
 
-export function AppIconButton({ icon, title, color, ...rest }: Props) {
+export function AppIconButton({ icon, title, color, handleOnPress }: Props) {
   return (
     <S.Container>
-      <S.Button {...rest}>
+      <S.Button onPress={handleOnPress}>
         <S.Icon name={icon} size={28} color={color} />
         <S.Title>{title}</S.Title>
       </S.Button>
