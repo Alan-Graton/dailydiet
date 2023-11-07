@@ -46,7 +46,12 @@ export default function Home() {
       />
       <S.ActionForm>
         <S.ActionFormTitle>Refeições</S.ActionFormTitle>
-        <AppIconButton icon="add" title="Nova refeição" color={COLORS.WHITE} />
+        <AppIconButton
+          icon="add"
+          title="Nova refeição"
+          color={COLORS.WHITE}
+          handleOnPress={() => navigation.push("/(NewMeal)")}
+        />
       </S.ActionForm>
 
       <FlatList
