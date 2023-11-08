@@ -6,14 +6,14 @@ export const Container = styled.View`
 
   align-items: center;
   justify-content: center;
-  /* height: 80px; */
+  height: 80px;
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  padding: 5px;
 
   position: relative;
   align-self: flex-start;
+
 
   margin-left: 12px;
 `;
