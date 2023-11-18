@@ -1,19 +1,27 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
+export const ModalContent = styled.View`
+  width: 95%;
+  height: 65%;
+
+  padding: 16px;
+
+  border-radius: 6px;
+
+  justify-content: space-around;
+
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
-export const Modal = styled.Modal``;
+export const Message = styled.Text`
+  font-size: ${({ theme }) => theme.FONT_SIZE.XMD}px;
+  font-weight: bold;
 
-export const Message = styled.Text``;
+  text-align: center;
+`;
 
-export const CancelBtn = styled.TouchableOpacity``;
-
-export const CancelTitle = styled.Text``;
-
-export const SubmitBtn = styled.TouchableOpacity``;
-
-export const SubmitTitle = styled.Text``;
+export const Actions = styled.View`
+  flex-direction: row;
+  padding: 10px;
+  gap: 10px;
+`;

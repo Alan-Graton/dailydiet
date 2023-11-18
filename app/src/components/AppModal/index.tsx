@@ -1,7 +1,5 @@
 import * as S from "./styles";
 
-import { View, Text } from "react-native";
-
 import { Modal } from "react-native-paper";
 import { AppButton } from "../AppButton";
 
@@ -32,30 +30,17 @@ export function AppModal({
       contentContainerStyle={{ alignItems: "center" }}
       {...rest}
     >
-      <View
-        style={{
-          backgroundColor: "white",
-          width: "90%",
-          height: "65%",
-          justifyContent: "space-around",
-          padding: 16,
-          borderRadius: 6,
-        }}
-      >
-        <Text style={{ fontWeight: "bold", fontSize: 18, textAlign: "center" }}>
-          Deseja realmente excluir o registro de refeição?
-        </Text>
-        <View
-          style={{
-            flexDirection: "row",
-            padding: 10,
-            gap: 10,
-          }}
-        >
-          <AppButton title="Cancelar" outline />
-          <AppButton title="Sim, excluir" />
-        </View>
-      </View>
+      <S.ModalContent>
+        <S.Message>{message}</S.Message>
+        <S.Actions>
+          <AppButton
+            title={cancelTitle}
+            outline
+            onPress={() => setVisible(false)}
+          />
+          <AppButton title={submitTitle} onPress={handleOnSubmit} />
+        </S.Actions>
+      </S.ModalContent>
     </Modal>
   );
 }
