@@ -1,13 +1,21 @@
 import * as S from "./styles";
 
-type Props = {
+import { TouchableOpacityProps } from "react-native";
+
+type Props = TouchableOpacityProps & {
   title: string;
   type?: S.ButtonStyleProps;
+  selected: S.ButtonStyleProps;
 };
 
-export function AppSelect({ title, type = "SUCCESS" }: Props) {
+export function AppSelect({
+  title,
+  type = "SUCCESS",
+  selected = "SUCCESS",
+  ...rest
+}: Props) {
   return (
-    <S.Button type={type}>
+    <S.Button selected={selected} type={type} {...rest}>
       <S.Status type={type} />
       <S.Title>{title}</S.Title>
     </S.Button>

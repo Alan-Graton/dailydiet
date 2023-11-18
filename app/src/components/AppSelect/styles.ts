@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
 
-export type ButtonStyleProps = "SUCCESS" | "ERROR";
+export type ButtonStyleProps = "SUCCESS" | "ERROR" | null;
 
 interface Props {
   type?: ButtonStyleProps;
+  selected?: ButtonStyleProps;
 }
 
 export const Button = styled.TouchableOpacity<Props>`
@@ -17,22 +18,23 @@ export const Button = styled.TouchableOpacity<Props>`
 
   gap: 10px;
 
-  /* border: 1px solid
-    ${({ theme, type }) => {
-      if (type === "SUCCESS") return theme.COLORS.GREEN_300;
-      else return theme.COLORS.RED_300;
-    }}; */
+  border: 1px solid
+    ${({ theme, type, selected }) => {
+      if (type === "SUCCESS" && selected === type)
+        return theme.COLORS.GREEN_300;
+      if (type === "ERROR" && selected === type) return theme.COLORS.RED_300;
+      else return theme.COLORS.GRAY_300;
+    }};
 
   border-radius: 6px;
 
   margin: 10px 0 15px 0;
 
-  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
-
-  /* background-color: ${({ theme, type }) => {
-    if (type === "SUCCESS") return theme.COLORS.GREEN_200;
-    else return theme.COLORS.RED_200;
-  }}; */
+  background-color: ${({ theme, type, selected }) => {
+    if (type === "SUCCESS" && selected === type) return theme.COLORS.GREEN_200;
+    if (type === "ERROR" && selected === type) return theme.COLORS.RED_200;
+    else return theme.COLORS.GRAY_300;
+  }};
 `;
 
 export const Title = styled.Text`
@@ -47,6 +49,6 @@ export const Status = styled.View<Props>`
 
   background-color: ${({ theme, type }) => {
     if (type === "SUCCESS") return theme.COLORS.GREEN_300;
-    else return theme.COLORS.RED_300;
+    if (type === "ERROR") return theme.COLORS.RED_300;
   }};
 `;
