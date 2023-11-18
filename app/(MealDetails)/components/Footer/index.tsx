@@ -1,7 +1,11 @@
 import { AppIconButton } from "@/components/AppIconButton";
 import * as S from "./styles";
 
-export function Footer() {
+type Props = {
+  setDeleteModal: (value: boolean) => void;
+};
+
+export function Footer({ setDeleteModal }: Props) {
   return (
     <>
       <S.Container>
@@ -16,7 +20,7 @@ export function Footer() {
         <AppIconButton
           icon="trash-bin-outline"
           handleOnPress={() => {
-            return;
+            setDeleteModal(true);
           }}
           outline
           title="Excluir refeição"
