@@ -26,15 +26,15 @@ export default function Home() {
   const { COLORS } = useTheme();
 
   const [meals, setMeals] = React.useState<IMealList[]>([
-    { date: "01/11/2023", time: "05:00", name: "Pão", feedback: "SUCCESS" },
-    {
-      date: "02/11/2023",
-      time: "11:30",
-      name: "Maionese",
-      feedback: "ERROR",
-    },
-    { date: "04/11/2023", time: "09:25", name: "Pipoca", feedback: "SUCCESS" },
-    { date: "05/11/2023", time: "18:23", name: "Banana", feedback: "ERROR" },
+    // { date: "01/11/2023", time: "05:00", name: "Pão", feedback: "SUCCESS" },
+    // {
+    //   date: "02/11/2023",
+    //   time: "11:30",
+    //   name: "Maionese",
+    //   feedback: "ERROR",
+    // },
+    // { date: "04/11/2023", time: "09:25", name: "Pipoca", feedback: "SUCCESS" },
+    // { date: "05/11/2023", time: "18:23", name: "Banana", feedback: "ERROR" },
   ]);
 
   return (
@@ -67,7 +67,7 @@ export default function Home() {
         )}
         ListEmptyComponent={() => (
           <AppEmptyList
-            title="Nenhum refeição"
+            title="Nenhuma refeição"
             subtitle="Que tal cadastrar uma agora?"
           />
         )}
