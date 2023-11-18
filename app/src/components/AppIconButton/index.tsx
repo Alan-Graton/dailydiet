@@ -4,17 +4,24 @@ import * as S from "./styles";
 
 type Props = {
   icon: keyof typeof Ionicons.glyphMap;
-  color: string;
+  color?: string;
   title: string;
+  outline?: boolean;
   handleOnPress: () => void;
 };
 
-export function AppIconButton({ icon, title, color, handleOnPress }: Props) {
+export function AppIconButton({
+  icon,
+  color = "black",
+  title,
+  outline = false,
+  handleOnPress,
+}: Props) {
   return (
     <S.Container>
-      <S.Button onPress={handleOnPress}>
+      <S.Button outline={outline} onPress={handleOnPress}>
         <S.Icon name={icon} size={28} color={color} />
-        <S.Title>{title}</S.Title>
+        <S.Title outline={outline}>{title}</S.Title>
       </S.Button>
     </S.Container>
   );
