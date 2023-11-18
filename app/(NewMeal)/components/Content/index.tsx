@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { View, Text } from "react-native";
+
+// Date & Time
+import { DateTime } from "luxon";
 
 // Application Components
 import { AppTextInput } from "@/components/AppTextInput";
 import { AppTextArea } from "@/components/AppTextArea";
 import { AppSelect } from "@/components/AppSelect";
 import { AppButton } from "@/components/AppButton";
+import { AppDateTimePicker } from "@/components/AppDateTimePicker";
 
 // Types
 import { IDietStatus } from "@/interfaces";
@@ -15,10 +19,37 @@ import { IDietStatus } from "@/interfaces";
 import * as S from "./styles";
 
 export function Content() {
-  const [selected, setSelected] = React.useState<IDietStatus | null>(null);
+  const [selected, setSelected] = useState<IDietStatus | null>(null);
+
+  const [date, setDate] = useState<Date>(new Date());
+  const [showDate, setShowDate] = useState<boolean>(false);
+
+  const [time, setTime] = useState<Date>(new Date());
+  const [showTime, setShowTime] = useState<boolean>(false);
 
   function handleSetSelected(status: IDietStatus) {
     setSelected((prevState) => (prevState = status));
+  }
+
+  function handleOnChangeDate(event: any, selectedDate: any) {
+    setShowDate(false);
+    setDate((prevState) => (prevState = selectedDate));
+  }
+
+  function handleOnChangeTime(event: any, selectedTime: any) {
+    setShowTime(false);
+    setTime((prevState) => (prevState = selectedTime));
+  }
+
+  // FIXME: Time is coming with +3H on first render
+  function transformDate(date: Date, type: "date" | "time") {
+    if (type === "date") {
+      return DateTime.fromISO(date.toISOString()).toFormat("dd/MM/yyyy");
+    } else {
+      return DateTime.fromISO(date.toISOString())
+        .setZone("utc")
+        .toFormat("HH:mm");
+    }
   }
 
   return (
@@ -34,11 +65,33 @@ export function Content() {
       <S.DateTimeContainer>
         <S.DateTimeForm>
           <Text style={{ fontWeight: "bold" }}>Data</Text>
-          <AppTextInput />
+          {showDate && (
+            <AppDateTimePicker
+              value={date}
+              mode="date"
+              handleOnChange={handleOnChangeDate}
+            />
+          )}
+          <AppTextInput
+            onPressIn={() => setShowDate(true)}
+            value={transformDate(date, "date")}
+            caretHidden
+          />
         </S.DateTimeForm>
         <S.DateTimeForm>
           <Text style={{ fontWeight: "bold" }}>Horário</Text>
-          <AppTextInput />
+          {showTime && (
+            <AppDateTimePicker
+              value={time}
+              mode="time"
+              handleOnChange={handleOnChangeTime}
+            />
+          )}
+          <AppTextInput
+            onPressIn={() => setShowTime(true)}
+            value={transformDate(time, "time")}
+            caretHidden
+          />
         </S.DateTimeForm>
       </S.DateTimeContainer>
       <S.DietStatusContainer>
