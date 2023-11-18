@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 import { View, Text } from "react-native";
 
-// Date & Time
-import { DateTime } from "luxon";
-
 // Application Components
 import { AppTextInput } from "@/components/AppTextInput";
 import { AppTextArea } from "@/components/AppTextArea";
@@ -12,8 +9,17 @@ import { AppSelect } from "@/components/AppSelect";
 import { AppButton } from "@/components/AppButton";
 import { AppDateTimePicker } from "@/components/AppDateTimePicker";
 
+// Storage
+import { postMeal } from "@/storage/postMeal";
+
+// Utils
+import { TransformDate } from "@/utils/TransformDate";
+import { handleDietStatus } from "@/utils/NewMeal/handleDietStatus";
+import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
+
 // Types
 import { IDietStatus } from "@/interfaces";
+import { IMealDTO } from "@/storage/MealDTO";
 
 // Styles
 import * as S from "./styles";
@@ -27,40 +33,52 @@ export function Content() {
   const [time, setTime] = useState<Date>(new Date());
   const [showTime, setShowTime] = useState<boolean>(false);
 
-  function handleSetSelected(status: IDietStatus) {
-    setSelected((prevState) => (prevState = status));
+  const [laoding, setLoading] = useState<boolean>(false);
+
+  const [meal, setMeal] = useState<IMealDTO>({
+    date: "",
+    time: "",
+    name: "",
+    description: "",
+    dietStatus: "SUCCESS",
+  });
+
+  async function handleSubmitMeal() {
+    const body = { setLoading: setLoading, meal: meal };
+    await postMeal(body);
   }
 
   function handleOnChangeDate(event: any, selectedDate: any) {
     setShowDate(false);
     setDate((prevState) => (prevState = selectedDate));
+    setMeal((prevState) => ({
+      ...prevState,
+      date: TransformDate(selectedDate, "date"),
+    }));
   }
 
   function handleOnChangeTime(event: any, selectedTime: any) {
     setShowTime(false);
     setTime((prevState) => (prevState = selectedTime));
-  }
-
-  // FIXME: Time is coming with +3H on first render
-  function transformDate(date: Date, type: "date" | "time") {
-    if (type === "date") {
-      return DateTime.fromISO(date.toISOString()).toFormat("dd/MM/yyyy");
-    } else {
-      return DateTime.fromISO(date.toISOString())
-        .setZone("utc")
-        .toFormat("HH:mm");
-    }
+    setMeal((prevState) => ({
+      ...prevState,
+      time: TransformDate(selectedTime, "time"),
+    }));
   }
 
   return (
     <S.Form>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Nome</S.TextInputLabel>
-        <AppTextInput />
+        <AppTextInput
+          onChangeText={(text) => handleSetValues("name", text, setMeal)}
+        />
       </View>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Descrição</S.TextInputLabel>
-        <AppTextArea />
+        <AppTextArea
+          onChangeText={(text) => handleSetValues("description", text, setMeal)}
+        />
       </View>
       <S.DateTimeContainer>
         <S.DateTimeForm>
@@ -74,7 +92,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowDate(true)}
-            value={transformDate(date, "date")}
+            value={TransformDate(date, "date")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -89,7 +107,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowTime(true)}
-            value={transformDate(time, "time")}
+            value={TransformDate(time, "time")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -99,19 +117,19 @@ export function Content() {
         <S.DietStatusForm>
           <AppSelect
             title="Sim"
-            onPress={() => handleSetSelected("SUCCESS")}
+            onPress={() => handleDietStatus("SUCCESS", setSelected, setMeal)}
             selected={selected}
           />
           <AppSelect
             title="Não"
             type="ERROR"
-            onPress={() => handleSetSelected("ERROR")}
+            onPress={() => handleDietStatus("ERROR", setSelected, setMeal)}
             selected={selected}
           />
         </S.DietStatusForm>
       </S.DietStatusContainer>
       <S.Footer>
-        <AppButton title="Cadastrar refeição" />
+        <AppButton title="Cadastrar refeição" onPress={handleSubmitMeal} />
       </S.Footer>
     </S.Form>
   );
