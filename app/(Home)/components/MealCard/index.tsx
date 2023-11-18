@@ -1,6 +1,7 @@
 import { Text } from "react-native";
 
 import * as S from "./styles";
+import { useRouter } from "expo-router";
 
 type Props = {
   date: string;
@@ -10,6 +11,8 @@ type Props = {
 };
 
 export function MealCard({ date, time, meal, type = "SUCCESS" }: Props) {
+  const navigation = useRouter();
+
   return (
     <S.Container
       contentContainerStyle={{
@@ -18,7 +21,7 @@ export function MealCard({ date, time, meal, type = "SUCCESS" }: Props) {
       }}
     >
       <S.DateTitle>{date}</S.DateTitle>
-      <S.Card>
+      <S.Card onPress={() => navigation.push("/(MealDetails)")}>
         <S.CardContent>
           <S.TimeTitle>{time}</S.TimeTitle>
           <Text>|</Text>
