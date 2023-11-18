@@ -1,5 +1,15 @@
 import { Stack } from "expo-router";
 
+import { useTheme } from "styled-components/native";
+
 export default function MealDetailsLayout() {
-  return <Stack />;
+  const { COLORS } = useTheme();
+  return (
+    <Stack
+      screenOptions={{
+        headerShadowVisible: false,
+        headerTintColor: COLORS.GRAY_700,
+      }}
+    />
+  );
 }
