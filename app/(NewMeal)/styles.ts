@@ -5,29 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export const Container = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
-  justify-content: space-between;
-
-  padding: 16px;
 `;
 
-export const InputLabel = styled.Text`
-  font-weight: bold;
-  align-self: flex-start;
-`;
-
-export const DateTimeForm = styled.View`
-  flex-direction: row;
-
+export const Form = styled.View`
+  background-color: red;
+  flex: 1;
   width: 100%;
+  padding: 16px;
 
   gap: 15px;
-`;
-
-export const DietStatusSelectForm = styled.View`
-  width: 100%;
-  align-items: center;
-
-  justify-content: space-around;
-
-  flex-direction: row;
 `;
