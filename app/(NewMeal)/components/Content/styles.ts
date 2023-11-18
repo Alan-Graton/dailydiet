@@ -40,5 +40,6 @@ export const DateTimeForm = styled.View`
 
 export const Footer = styled.View`
   width: 100%;
+  flex: 1;
   align-items: center;
 `;
