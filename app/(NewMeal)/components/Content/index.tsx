@@ -2,26 +2,21 @@ import React, { useState } from "react";
 
 import { View, Text } from "react-native";
 
-// Application Components
 import { AppTextInput } from "@/components/AppTextInput";
 import { AppTextArea } from "@/components/AppTextArea";
 import { AppSelect } from "@/components/AppSelect";
 import { AppButton } from "@/components/AppButton";
 import { AppDateTimePicker } from "@/components/AppDateTimePicker";
 
-// Storage
 import { postMeal } from "@/storage/postMeal";
 
-// Utils
 import { TransformDate } from "@/utils/TransformDate";
 import { handleDietStatus } from "@/utils/NewMeal/handleDietStatus";
 import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
 
-// Types
 import { IDietStatus } from "@/interfaces";
-import { IMealDTO } from "@/storage/MealDTO";
+import { IMealDTO } from "@/storage/config/MealDTO";
 
-// Styles
 import * as S from "./styles";
 
 export function Content() {
