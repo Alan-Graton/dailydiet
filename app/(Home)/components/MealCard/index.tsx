@@ -11,6 +11,9 @@ type Props = {
   item: IMealList;
 };
 
+/** TODO:
+ * Refeições com datas iguais devem estar agrupadas
+ */
 export function MealCard({ item }: Props) {
   const navigation = useRouter();
 
