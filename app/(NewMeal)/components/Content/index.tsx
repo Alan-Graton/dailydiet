@@ -7,20 +7,21 @@ import { AppTextArea } from "@/components/AppTextArea";
 import { AppSelect } from "@/components/AppSelect";
 import { AppButton } from "@/components/AppButton";
 import { AppDateTimePicker } from "@/components/AppDateTimePicker";
+import { AppLoader } from "@/components/AppLoader";
 
+import { IMealDTO } from "@/storage/config/MealDTO";
 import { postMeal } from "@/storage/postMeal";
 
-import { TransformDate } from "@/utils/TransformDate";
-import { handleDietStatus } from "@/utils/NewMeal/handleDietStatus";
+import { TransformDateTime } from "@/utils/TransformDate";
+import { handleFeedback } from "@/utils/NewMeal/handleFeedback";
 import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
 
-import { IDietStatus } from "@/interfaces";
-import { IMealDTO } from "@/storage/config/MealDTO";
+import { IFeedback } from "@/interfaces";
 
 import * as S from "./styles";
 
 export function Content() {
-  const [selected, setSelected] = useState<IDietStatus | null>(null);
+  const [selected, setSelected] = useState<IFeedback | null>(null);
 
   const [date, setDate] = useState<Date>(new Date());
   const [showDate, setShowDate] = useState<boolean>(false);
@@ -28,37 +29,32 @@ export function Content() {
   const [time, setTime] = useState<Date>(new Date());
   const [showTime, setShowTime] = useState<boolean>(false);
 
-  const [laoding, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [meal, setMeal] = useState<IMealDTO>({
     date: "",
     time: "",
     name: "",
     description: "",
-    dietStatus: "SUCCESS",
+    feedback: "SUCCESS",
   });
 
   async function handleSubmitMeal() {
-    const body = { setLoading: setLoading, meal: meal };
-    await postMeal(body);
+    setLoading(true);
+    await postMeal(meal);
+    setLoading(false);
   }
 
   function handleOnChangeDate(event: any, selectedDate: any) {
     setShowDate(false);
     setDate((prevState) => (prevState = selectedDate));
-    setMeal((prevState) => ({
-      ...prevState,
-      date: TransformDate(selectedDate, "date"),
-    }));
+    handleSetValues("date", selectedDate, setMeal);
   }
 
   function handleOnChangeTime(event: any, selectedTime: any) {
     setShowTime(false);
     setTime((prevState) => (prevState = selectedTime));
-    setMeal((prevState) => ({
-      ...prevState,
-      time: TransformDate(selectedTime, "time"),
-    }));
+    handleSetValues("time", selectedTime, setMeal);
   }
 
   return (
@@ -87,7 +83,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowDate(true)}
-            value={TransformDate(date, "date")}
+            value={TransformDateTime(date, "date")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -102,29 +98,32 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowTime(true)}
-            value={TransformDate(time, "time")}
+            value={TransformDateTime(time, "time")}
             caretHidden
           />
         </S.DateTimeForm>
       </S.DateTimeContainer>
-      <S.DietStatusContainer>
+      <S.FeedbackContainer>
         <Text style={{ fontWeight: "bold" }}>Está dentro da dieta?</Text>
-        <S.DietStatusForm>
+        <S.FeedbackForm>
           <AppSelect
             title="Sim"
-            onPress={() => handleDietStatus("SUCCESS", setSelected, setMeal)}
+            onPress={() => handleFeedback("SUCCESS", setSelected, setMeal)}
             selected={selected}
           />
           <AppSelect
             title="Não"
             type="ERROR"
-            onPress={() => handleDietStatus("ERROR", setSelected, setMeal)}
+            onPress={() => handleFeedback("ERROR", setSelected, setMeal)}
             selected={selected}
           />
-        </S.DietStatusForm>
-      </S.DietStatusContainer>
+        </S.FeedbackForm>
+      </S.FeedbackContainer>
       <S.Footer>
-        <AppButton title="Cadastrar refeição" onPress={handleSubmitMeal} />
+        <AppLoader loading={loading} />
+        {!loading && (
+          <AppButton title="Cadastrar refeição" onPress={handleSubmitMeal} />
+        )}
       </S.Footer>
     </S.Form>
   );
