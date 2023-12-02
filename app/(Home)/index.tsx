@@ -29,6 +29,8 @@ export default function Home() {
     async function fetchMeals() {
       setLoading(true);
       const response = await getAllMeals();
+      if (!response) return;
+
       setMeals((prevState) => (prevState = response));
       setLoading(false);
     }
