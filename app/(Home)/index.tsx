@@ -1,41 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 
-// Application Components
+import { getAllMeals } from "@/storage/getAllMeals";
+
 import { AppIconButton } from "@/components/AppIconButton";
 import { AppEmptyList } from "@/components/AppEmptyList";
+import { AppLoader } from "@/components/AppLoader";
 
-// Screen Components
 import { MealCard } from "./components/MealCard";
 import { StatisticsCard } from "./components/StatisticsCard";
 
-// Styles
+import { IMealList } from "@/interfaces";
+
 import * as S from "./styles";
 import { useTheme } from "styled-components/native";
 
-interface IMealList {
-  date: string;
-  time: string;
-  name: string;
-  feedback: "SUCCESS" | "ERROR";
-}
-
 export default function Home() {
+  const isFocused = useIsFocused();
   const navigation = useRouter();
   const { COLORS } = useTheme();
 
-  const [meals, setMeals] = React.useState<IMealList[]>([
-    // { date: "01/11/2023", time: "05:00", name: "Pão", feedback: "SUCCESS" },
-    // {
-    //   date: "02/11/2023",
-    //   time: "11:30",
-    //   name: "Maionese",
-    //   feedback: "ERROR",
-    // },
-    // { date: "04/11/2023", time: "09:25", name: "Pipoca", feedback: "SUCCESS" },
-    // { date: "05/11/2023", time: "18:23", name: "Banana", feedback: "ERROR" },
-  ]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [meals, setMeals] = useState<IMealList[]>([]);
+
+  React.useEffect(() => {
+    async function fetchMeals() {
+      setLoading(true);
+      await getAllMeals(setMeals);
+      setLoading(false);
+    }
+
+    fetchMeals();
+  }, [isFocused]);
 
   return (
     <S.Container>
@@ -58,12 +56,17 @@ export default function Home() {
         data={meals}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <MealCard
-            date={item.date}
-            time={item.time}
-            meal={item.name}
-            type={item.feedback}
-          />
+          <>
+            <AppLoader loading={loading} />
+            {!loading && (
+              <MealCard
+                date={item.date}
+                time={item.time}
+                meal={item.name}
+                type={item.feedback}
+              />
+            )}
+          </>
         )}
         ListEmptyComponent={() => (
           <AppEmptyList
