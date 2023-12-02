@@ -1,4 +1,4 @@
-import { IMealDTO } from "@/storage/MealDTO";
+import { IMealDTO } from "@/storage/config/MealDTO";
 
 type IMealForm = "date" | "time" | "name" | "description" | "dietStatus";
 

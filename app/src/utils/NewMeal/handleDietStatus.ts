@@ -1,5 +1,5 @@
 import { IDietStatus } from "@/interfaces";
-import { IMealDTO } from "@/storage/MealDTO";
+import { IMealDTO } from "@/storage/config/MealDTO";
 
 export function handleDietStatus(
   status: IDietStatus,
