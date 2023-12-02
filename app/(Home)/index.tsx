@@ -28,7 +28,8 @@ export default function Home() {
   React.useEffect(() => {
     async function fetchMeals() {
       setLoading(true);
-      await getAllMeals(setMeals);
+      const response = await getAllMeals();
+      setMeals((prevState) => (prevState = response));
       setLoading(false);
     }
 
