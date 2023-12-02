@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { IMealDTO } from "./MealDTO";
-import { StorageEntity } from "./StorageConfig";
+import { IMealDTO } from "./config/MealDTO";
+import { StorageEntity } from "./config/StorageConfig";
 
 interface Params {
   setLoading: (state: boolean) => void;
