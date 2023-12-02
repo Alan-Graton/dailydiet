@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 
 /** FIXME: Time is coming with +3H on first render
  */
-export function TransformDate(date: Date, mode: "date" | "time") {
+export function TransformDateTime(date: Date, mode: "date" | "time") {
   if (mode === "date") {
     return DateTime.fromISO(date.toISOString()).toFormat("dd.MM.yyyy");
   } else {
