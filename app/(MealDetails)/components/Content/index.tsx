@@ -16,10 +16,10 @@ export function Content() {
           <S.DateTimeTitle>Data e Horário</S.DateTimeTitle>
           <S.DateTime>12/08/2023 às 16:00</S.DateTime>
         </View>
-        <S.DietStatusForm>
-          <S.DietStatusFeedback />
-          <S.DietStatusText>dentro da dieta</S.DietStatusText>
-        </S.DietStatusForm>
+        <S.FeedbackForm>
+          <S.FeedbackFeedback />
+          <S.FeedbackText>dentro da dieta</S.FeedbackText>
+        </S.FeedbackForm>
       </S.Container>
     </>
   );

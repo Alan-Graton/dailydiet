@@ -23,7 +23,7 @@ export const DateTime = styled.Text`
   font-size: 16px;
 `;
 
-export const DietStatusForm = styled.View`
+export const FeedbackForm = styled.View`
   width: 45%;
   height: 20%;
 
@@ -38,9 +38,9 @@ export const DietStatusForm = styled.View`
   justify-content: space-evenly;
 `;
 
-export const DietStatusText = styled.Text``;
+export const FeedbackText = styled.Text``;
 
-export const DietStatusFeedback = styled.View`
+export const FeedbackFeedback = styled.View`
   background-color: green;
 
   width: 10px;

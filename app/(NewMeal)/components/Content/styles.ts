@@ -19,11 +19,11 @@ export const DateTimeContainer = styled.View`
   gap: 15px;
 `;
 
-export const DietStatusContainer = styled.View`
+export const FeedbackContainer = styled.View`
   margin-bottom: 16%;
 `;
 
-export const DietStatusForm = styled.View`
+export const FeedbackForm = styled.View`
   flex-direction: row;
 
   align-items: center;
