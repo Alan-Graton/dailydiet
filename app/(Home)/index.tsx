@@ -54,18 +54,11 @@ export default function Home() {
 
       <FlatList
         data={meals}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item?.name}
         renderItem={({ item }) => (
           <>
             <AppLoader loading={loading} />
-            {!loading && (
-              <MealCard
-                date={item.date}
-                time={item.time}
-                meal={item.name}
-                type={item.feedback}
-              />
-            )}
+            {!loading && <MealCard item={item} />}
           </>
         )}
         ListEmptyComponent={() => (

@@ -1,16 +1,17 @@
-import { Text } from "react-native";
-
-import * as S from "./styles";
+import React from "react";
 import { useRouter } from "expo-router";
 
+import { Text } from "react-native";
+
+import { IMealList } from "@/interfaces";
+
+import * as S from "./styles";
+
 type Props = {
-  date: string;
-  time: string;
-  meal: string;
-  type?: S.FeedBackBallStyleProps;
+  item: IMealList;
 };
 
-export function MealCard({ date, time, meal, type = "SUCCESS" }: Props) {
+export function MealCard({ item }: Props) {
   const navigation = useRouter();
 
   return (
@@ -20,14 +21,14 @@ export function MealCard({ date, time, meal, type = "SUCCESS" }: Props) {
         justifyContent: "center",
       }}
     >
-      <S.DateTitle>{date}</S.DateTitle>
+      <S.DateTitle>{item?.date}</S.DateTitle>
       <S.Card onPress={() => navigation.push("/(MealDetails)")}>
         <S.CardContent>
-          <S.TimeTitle>{time}</S.TimeTitle>
+          <S.TimeTitle>{item?.time}</S.TimeTitle>
           <Text>|</Text>
-          <S.MealName>{meal}</S.MealName>
+          <S.MealName>{item?.name}</S.MealName>
         </S.CardContent>
-        <S.FeedBackBall type={type} />
+        <S.FeedBackBall type={item?.feedback} />
       </S.Card>
     </S.Container>
   );
