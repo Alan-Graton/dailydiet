@@ -26,7 +26,11 @@ const DEFAULT_VALUE = {
 
 export const MealContext = React.createContext<PropsMealContext>(DEFAULT_VALUE);
 
-export function MealProvider({ children }: any) {
+interface Props {
+  children: React.ReactNode;
+}
+
+export function MealProvider({ children }: Props) {
   const [selectedMeal, setSelectedMeal] = React.useState<SelectedMealType>(
     DEFAULT_VALUE.selectedMeal
   );
