@@ -5,5 +5,5 @@ export interface IMealList {
   time: string;
   name: string;
   description: string;
-  feedback: "SUCCESS" | "ERROR";
+  feedback: IFeedback;
 }

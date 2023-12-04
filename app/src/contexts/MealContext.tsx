@@ -1,11 +1,16 @@
 import React from "react";
-import { IMealList } from "@/interfaces";
 
-type SelectedMealType = IMealList;
+type SelectedMealType = {
+  date: string;
+  time: string;
+  name: string;
+  description: string;
+  feedback: string;
+};
 
 interface PropsMealContext {
-  selectedMeal: any;
-  setSelectedMeal: React.Dispatch<React.SetStateAction<any>>;
+  selectedMeal: SelectedMealType;
+  setSelectedMeal: React.Dispatch<React.SetStateAction<SelectedMealType>>;
 }
 
 const DEFAULT_VALUE = {
@@ -14,7 +19,7 @@ const DEFAULT_VALUE = {
     time: "",
     name: "",
     description: "",
-    feedback: "SUCCESS",
+    feedback: "",
   },
   setSelectedMeal: () => {},
 };
@@ -22,7 +27,7 @@ const DEFAULT_VALUE = {
 export const MealContext = React.createContext<PropsMealContext>(DEFAULT_VALUE);
 
 export function MealProvider({ children }: any) {
-  const [selectedMeal, setSelectedMeal] = React.useState(
+  const [selectedMeal, setSelectedMeal] = React.useState<SelectedMealType>(
     DEFAULT_VALUE.selectedMeal
   );
 
