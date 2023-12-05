@@ -1,4 +1,6 @@
+import { useRouter } from "expo-router";
 import { AppIconButton } from "@/components/AppIconButton";
+
 import * as S from "./styles";
 
 type Props = {
@@ -6,14 +8,14 @@ type Props = {
 };
 
 export function Footer({ setDeleteModal }: Props) {
+  const navigation = useRouter();
+
   return (
     <>
       <S.Container>
         <AppIconButton
           icon="ios-pencil-sharp"
-          handleOnPress={() => {
-            return;
-          }}
+          handleOnPress={() => navigation.push("/(NewMeal)")}
           title="Editar refeição"
           color="white"
         />

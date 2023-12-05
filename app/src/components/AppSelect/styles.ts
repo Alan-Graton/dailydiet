@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 
-export type ButtonStyleProps = "SUCCESS" | "ERROR" | null;
+// export type ButtonStyleProps = "SUCCESS" | "ERROR" | null;
+export type ButtonStyleProps = string | null;
 
 interface Props {
   type?: ButtonStyleProps;

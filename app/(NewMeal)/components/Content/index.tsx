@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MealContext } from "@/contexts/MealContext";
 
 import { View, Text } from "react-native";
 
@@ -11,6 +12,7 @@ import { AppLoader } from "@/components/AppLoader";
 
 import { IMealDTO } from "@/storage/config/MealDTO";
 import { postMeal } from "@/storage/postMeal";
+import { putMeal } from "@/storage/putMeal";
 
 import { TransformDateTime } from "@/utils/TransformDate";
 import { handleFeedback } from "@/utils/NewMeal/handleFeedback";
@@ -21,6 +23,8 @@ import { IFeedback } from "@/interfaces";
 import * as S from "./styles";
 
 export function Content() {
+  const { selectedMeal } = React.useContext(MealContext);
+
   const [selected, setSelected] = useState<IFeedback | null>(null);
 
   const [date, setDate] = useState<Date>(new Date());
@@ -39,22 +43,30 @@ export function Content() {
     feedback: "SUCCESS",
   });
 
+  const BTN_TITLE = selectedMeal ? "Salvar alterações" : "Cadastrar refeição";
+
   async function handleSubmitMeal() {
     setLoading(true);
-    await postMeal(meal);
+    if (selectedMeal) {
+      await postMeal(meal);
+      return;
+    }
+
+    await putMeal(selectedMeal);
+
     setLoading(false);
   }
 
-  function handleOnChangeDate(event: any, selectedDate: any) {
-    setShowDate(false);
-    setDate((prevState) => (prevState = selectedDate));
-    handleSetValues("date", selectedDate, setMeal);
-  }
-
-  function handleOnChangeTime(event: any, selectedTime: any) {
-    setShowTime(false);
-    setTime((prevState) => (prevState = selectedTime));
-    handleSetValues("time", selectedTime, setMeal);
+  function handleOnChageDateTime(event: any, selectedValue: any) {
+    if (showDate) {
+      setShowDate(false);
+      setDate((prevState) => (prevState = selectedValue));
+      handleSetValues("date", selectedValue, setMeal);
+    } else if (showTime) {
+      setShowTime(false);
+      setTime((prevState) => (prevState = selectedValue));
+      handleSetValues("time", selectedValue, setMeal);
+    }
   }
 
   return (
@@ -63,12 +75,14 @@ export function Content() {
         <S.TextInputLabel>Nome</S.TextInputLabel>
         <AppTextInput
           onChangeText={(text) => handleSetValues("name", text, setMeal)}
+          value={selectedMeal && selectedMeal.name}
         />
       </View>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Descrição</S.TextInputLabel>
         <AppTextArea
           onChangeText={(text) => handleSetValues("description", text, setMeal)}
+          value={selectedMeal && selectedMeal.description}
         />
       </View>
       <S.DateTimeContainer>
@@ -78,12 +92,14 @@ export function Content() {
             <AppDateTimePicker
               value={date}
               mode="date"
-              handleOnChange={handleOnChangeDate}
+              handleOnChange={handleOnChageDateTime}
             />
           )}
           <AppTextInput
             onPressIn={() => setShowDate(true)}
-            value={TransformDateTime(date, "date")}
+            value={
+              selectedMeal ? selectedMeal.date : TransformDateTime(date, "date")
+            }
             caretHidden
           />
         </S.DateTimeForm>
@@ -93,12 +109,14 @@ export function Content() {
             <AppDateTimePicker
               value={time}
               mode="time"
-              handleOnChange={handleOnChangeTime}
+              handleOnChange={handleOnChageDateTime}
             />
           )}
           <AppTextInput
             onPressIn={() => setShowTime(true)}
-            value={TransformDateTime(time, "time")}
+            value={
+              selectedMeal ? selectedMeal.time : TransformDateTime(time, "time")
+            }
             caretHidden
           />
         </S.DateTimeForm>
@@ -109,21 +127,19 @@ export function Content() {
           <AppSelect
             title="Sim"
             onPress={() => handleFeedback("SUCCESS", setSelected, setMeal)}
-            selected={selected}
+            selected={selectedMeal ? selectedMeal.feedback : selected}
           />
           <AppSelect
             title="Não"
             type="ERROR"
             onPress={() => handleFeedback("ERROR", setSelected, setMeal)}
-            selected={selected}
+            selected={selectedMeal ? selectedMeal.feedback : selected}
           />
         </S.FeedbackForm>
       </S.FeedbackContainer>
       <S.Footer>
         <AppLoader loading={loading} />
-        {!loading && (
-          <AppButton title="Cadastrar refeição" onPress={handleSubmitMeal} />
-        )}
+        {!loading && <AppButton title={BTN_TITLE} onPress={handleSubmitMeal} />}
       </S.Footer>
     </S.Form>
   );

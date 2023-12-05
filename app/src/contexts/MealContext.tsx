@@ -4,7 +4,7 @@ import React from "react";
  * [feedback] type are not working properly...
  */
 
-type SelectedMealType = {
+export type SelectedMealType = {
   date: string;
   time: string;
   name: string;
