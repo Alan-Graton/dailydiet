@@ -10,23 +10,28 @@ export function Content() {
   console.log("\n\n[Meal Details - Content] Selected Meal: ", selectedMeal);
 
   const FEEDBACK_TEXT =
-    selectedMeal.feedback === "SUCCESS" ? "dentro da dieta" : "fora da dieta";
+    selectedMeal && selectedMeal.feedback === "SUCCESS"
+      ? "dentro da dieta"
+      : "fora da dieta";
 
   return (
     <>
       <S.Container>
         <View>
           <S.Title>Sanduíche</S.Title>
-          <S.Description>{selectedMeal.description}</S.Description>
+          <S.Description>
+            {selectedMeal && selectedMeal.description}
+          </S.Description>
         </View>
         <View>
           <S.DateTimeTitle>Data e Horário</S.DateTimeTitle>
           <S.DateTime>
-            {selectedMeal.date} às {selectedMeal.time}
+            {selectedMeal && selectedMeal.date} às{" "}
+            {selectedMeal && selectedMeal.time}
           </S.DateTime>
         </View>
         <S.FeedbackForm>
-          <S.FeedbackBall feedback={selectedMeal.feedback} />
+          <S.FeedbackBall feedback={selectedMeal && selectedMeal.feedback} />
           <S.FeedbackText>{FEEDBACK_TEXT}</S.FeedbackText>
         </S.FeedbackForm>
       </S.Container>
