@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { MealContext } from "@/contexts/MealContext";
+
 import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
@@ -22,6 +25,8 @@ export default function Home() {
   const navigation = useRouter();
   const { COLORS } = useTheme();
 
+  const { selectedMeal, setSelectedMeal } = React.useContext(MealContext);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [meals, setMeals] = useState<IMealList[]>([]);
 
@@ -35,7 +40,10 @@ export default function Home() {
       setLoading(false);
     }
 
-    fetchMeals();
+    if (isFocused) {
+      setSelectedMeal(null);
+      fetchMeals();
+    }
   }, [isFocused]);
 
   return (

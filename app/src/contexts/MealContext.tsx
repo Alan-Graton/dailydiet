@@ -13,8 +13,10 @@ export type SelectedMealType = {
 };
 
 interface PropsMealContext {
-  selectedMeal: SelectedMealType;
-  setSelectedMeal: React.Dispatch<React.SetStateAction<SelectedMealType>>;
+  selectedMeal: SelectedMealType | null;
+  setSelectedMeal: React.Dispatch<
+    React.SetStateAction<SelectedMealType | null>
+  >;
 }
 
 const DEFAULT_VALUE = {
@@ -35,9 +37,8 @@ interface Props {
 }
 
 export function MealProvider({ children }: Props) {
-  const [selectedMeal, setSelectedMeal] = React.useState<SelectedMealType>(
-    DEFAULT_VALUE.selectedMeal
-  );
+  const [selectedMeal, setSelectedMeal] =
+    React.useState<SelectedMealType | null>(DEFAULT_VALUE.selectedMeal);
 
   return (
     <MealContext.Provider value={{ selectedMeal, setSelectedMeal }}>

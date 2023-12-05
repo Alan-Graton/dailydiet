@@ -35,6 +35,8 @@ export function Content() {
 
   const [loading, setLoading] = useState<boolean>(false);
 
+  const BTN_TITLE = selectedMeal ? "Salvar alterações" : "Cadastrar refeição";
+
   const [meal, setMeal] = useState<IMealDTO>({
     date: "",
     time: "",
@@ -43,18 +45,14 @@ export function Content() {
     feedback: "SUCCESS",
   });
 
-  const BTN_TITLE = selectedMeal ? "Salvar alterações" : "Cadastrar refeição";
-
+  // TODO: Após salvar, alterar, redirecionar para a tela de Feedback
   async function handleSubmitMeal() {
-    setLoading(true);
-    if (selectedMeal) {
-      await postMeal(meal);
+    if (!selectedMeal) {
+      await postMeal(meal, setLoading);
       return;
     }
 
-    await putMeal(selectedMeal);
-
-    setLoading(false);
+    await putMeal(selectedMeal, setLoading);
   }
 
   function handleOnChageDateTime(event: any, selectedValue: any) {
@@ -75,14 +73,14 @@ export function Content() {
         <S.TextInputLabel>Nome</S.TextInputLabel>
         <AppTextInput
           onChangeText={(text) => handleSetValues("name", text, setMeal)}
-          value={selectedMeal && selectedMeal.name}
+          value={selectedMeal ? selectedMeal.name : meal.name}
         />
       </View>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Descrição</S.TextInputLabel>
         <AppTextArea
           onChangeText={(text) => handleSetValues("description", text, setMeal)}
-          value={selectedMeal && selectedMeal.description}
+          value={selectedMeal ? selectedMeal.description : meal.description}
         />
       </View>
       <S.DateTimeContainer>
