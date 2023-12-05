@@ -67,6 +67,7 @@ export function Content() {
     }
   }
 
+  // TODO: Por hora, mostrar os dados de [selectedMeal] como Placeholder
   return (
     <S.Form>
       <View style={{ width: "100%" }}>
