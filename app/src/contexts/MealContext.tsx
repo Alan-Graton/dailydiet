@@ -1,11 +1,15 @@
 import React from "react";
 
+/** TODO:
+ * [feedback] type are not working properly...
+ */
+
 type SelectedMealType = {
   date: string;
   time: string;
   name: string;
   description: string;
-  feedback: string;
+  feedback: "SUCCESS" | "ERROR" | string;
 };
 
 interface PropsMealContext {
@@ -19,7 +23,7 @@ const DEFAULT_VALUE = {
     time: "",
     name: "",
     description: "",
-    feedback: "",
+    feedback: "SUCCESS",
   },
   setSelectedMeal: () => {},
 };

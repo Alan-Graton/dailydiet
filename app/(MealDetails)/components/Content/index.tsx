@@ -1,24 +1,33 @@
+import React from "react";
 import * as S from "./styles";
 
 import { View } from "react-native";
+import { MealContext } from "@/contexts/MealContext";
 
 export function Content() {
+  const { selectedMeal } = React.useContext(MealContext);
+
+  console.log("\n\n[Meal Details - Content] Selected Meal: ", selectedMeal);
+
+  const FEEDBACK_TEXT =
+    selectedMeal.feedback === "SUCCESS" ? "dentro da dieta" : "fora da dieta";
+
   return (
     <>
       <S.Container>
         <View>
           <S.Title>Sanduíche</S.Title>
-          <S.Description>
-            Sanduíche de pão integral com atum e salada de alface e tomate
-          </S.Description>
+          <S.Description>{selectedMeal.description}</S.Description>
         </View>
         <View>
           <S.DateTimeTitle>Data e Horário</S.DateTimeTitle>
-          <S.DateTime>12/08/2023 às 16:00</S.DateTime>
+          <S.DateTime>
+            {selectedMeal.date} às {selectedMeal.time}
+          </S.DateTime>
         </View>
         <S.FeedbackForm>
-          <S.FeedbackFeedback />
-          <S.FeedbackText>dentro da dieta</S.FeedbackText>
+          <S.FeedbackBall feedback={selectedMeal.feedback} />
+          <S.FeedbackText>{FEEDBACK_TEXT}</S.FeedbackText>
         </S.FeedbackForm>
       </S.Container>
     </>

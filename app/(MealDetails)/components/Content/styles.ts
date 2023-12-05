@@ -1,5 +1,12 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+
+import { SafeAreaView } from "react-native-safe-area-context";
+
+interface FeedbackBallStylesProps {
+  feedback: string;
+}
+
+type Props = FeedbackBallStylesProps;
 
 export const Container = styled(SafeAreaView)`
   justify-content: space-around;
@@ -40,8 +47,9 @@ export const FeedbackForm = styled.View`
 
 export const FeedbackText = styled.Text``;
 
-export const FeedbackFeedback = styled.View`
-  background-color: green;
+export const FeedbackBall = styled.View<Props>`
+  background-color: ${({ feedback }) =>
+    feedback === "SUCCESS" ? "green" : "red"};
 
   width: 10px;
   height: 10px;
