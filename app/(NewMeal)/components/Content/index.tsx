@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
+
 import { MealContext } from "@/contexts/MealContext";
 
 import { View, Text } from "react-native";
@@ -23,6 +25,8 @@ import { IFeedback } from "@/interfaces";
 import * as S from "./styles";
 
 export function Content() {
+  const navigation = useRouter();
+
   const { selectedMeal } = React.useContext(MealContext);
 
   const [selected, setSelected] = useState<IFeedback | null>(null);
@@ -35,24 +39,35 @@ export function Content() {
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const BTN_TITLE = selectedMeal ? "Salvar alterações" : "Cadastrar refeição";
+  const hasSelectedMeal = selectedMeal && true;
 
-  const [meal, setMeal] = useState<IMealDTO>({
+  const DEFAULT_MEAL: IMealDTO = {
     date: "",
     time: "",
     name: "",
     description: "",
     feedback: "SUCCESS",
-  });
+  };
+
+  const BTN_TITLE = hasSelectedMeal
+    ? "Salvar alterações"
+    : "Cadastrar refeição";
+
+  // TODO: Refac these types pleaseeeee
+  const [meal, setMeal] = useState<IMealDTO>(
+    hasSelectedMeal ? (selectedMeal as IMealDTO) : DEFAULT_MEAL
+  );
 
   // TODO: Após salvar, alterar, redirecionar para a tela de Feedback
   async function handleSubmitMeal() {
-    if (!selectedMeal) {
+    if (!hasSelectedMeal) {
       await postMeal(meal, setLoading);
+      navigation.push(`/(DietFeedback)/`);
       return;
     }
 
-    await putMeal(selectedMeal, setLoading);
+    await putMeal(meal, setLoading);
+    navigation.push(`/(DietFeedback)/`);
   }
 
   function handleOnChageDateTime(event: any, selectedValue: any) {
