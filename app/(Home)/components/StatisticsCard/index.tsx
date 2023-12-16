@@ -16,7 +16,7 @@ export function StatisticsCard({
 }: Props) {
   return (
     <S.StatisticsButton type={type} {...rest}>
-      <S.OpenIcon size={24} />
+      <S.OpenIcon size={24} type={type} />
       <S.Title>{title}</S.Title>
       <S.SubTitle>{subtitle}</S.SubTitle>
     </S.StatisticsButton>
