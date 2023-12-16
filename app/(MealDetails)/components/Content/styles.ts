@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
+import { IFeedback } from "@/interfaces";
 
 interface FeedbackBallStylesProps {
-  feedback: string;
+  feedback: IFeedback | undefined;
 }
 
 type Props = FeedbackBallStylesProps;
@@ -48,8 +49,11 @@ export const FeedbackForm = styled.View`
 export const FeedbackText = styled.Text``;
 
 export const FeedbackBall = styled.View<Props>`
-  background-color: ${({ feedback }) =>
-    feedback === "SUCCESS" ? "green" : "red"};
+  background-color: ${({ feedback }) => {
+    if (!feedback) return "transparent";
+    if (feedback === "SUCCESS") return "green";
+    if (feedback === "ERROR") return "red";
+  }};
 
   width: 10px;
   height: 10px;

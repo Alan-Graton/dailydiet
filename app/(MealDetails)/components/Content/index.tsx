@@ -1,37 +1,31 @@
 import React from "react";
-import * as S from "./styles";
+import { MealContext } from "@/contexts/MealContext";
 
 import { View } from "react-native";
-import { MealContext } from "@/contexts/MealContext";
+
+import * as S from "./styles";
 
 export function Content() {
   const { selectedMeal } = React.useContext(MealContext);
 
-  console.log("\n\n[Meal Details - Content] Selected Meal: ", selectedMeal);
-
   const FEEDBACK_TEXT =
-    selectedMeal && selectedMeal.feedback === "SUCCESS"
-      ? "dentro da dieta"
-      : "fora da dieta";
+    selectedMeal?.feedback === "SUCCESS" ? "dentro da dieta" : "fora da dieta";
 
   return (
     <>
       <S.Container>
         <View>
-          <S.Title>Sanduíche</S.Title>
-          <S.Description>
-            {selectedMeal && selectedMeal.description}
-          </S.Description>
+          <S.Title>{selectedMeal?.name}</S.Title>
+          <S.Description>{selectedMeal?.description}</S.Description>
         </View>
         <View>
           <S.DateTimeTitle>Data e Horário</S.DateTimeTitle>
           <S.DateTime>
-            {selectedMeal && selectedMeal.date} às{" "}
-            {selectedMeal && selectedMeal.time}
+            {selectedMeal?.date} às {selectedMeal?.time}
           </S.DateTime>
         </View>
         <S.FeedbackForm>
-          <S.FeedbackBall feedback={selectedMeal && selectedMeal.feedback} />
+          <S.FeedbackBall feedback={selectedMeal?.feedback} />
           <S.FeedbackText>{FEEDBACK_TEXT}</S.FeedbackText>
         </S.FeedbackForm>
       </S.Container>
