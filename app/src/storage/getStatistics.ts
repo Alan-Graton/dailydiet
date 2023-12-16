@@ -1,23 +1,26 @@
+import { GroupMealsByStatus } from "@/utils/GroupMealsByStatus";
 import { IMealDTO } from "./config/MealDTO";
 
 import { IStatistics } from "@/contexts/StatistcsContext";
+import { CalculateMealsStatusPercentage } from "@/utils/CalculateMealsStatusPercentage";
 
 export function getStatistics(meals: IMealDTO[]): IStatistics | null {
   try {
-    const inDietMeals = meals.flatMap((meal) => {
-      return meal.feedback === "SUCCESS" ? [meal] : [];
-    });
+    const groupedMeals = GroupMealsByStatus(meals);
 
-    const outDietMeals = meals.flatMap((meal) => {
-      return meal.feedback === "ERROR" ? [meal] : [];
-    });
+    const handlePercentageCalculation = CalculateMealsStatusPercentage(
+      meals.length,
+      groupedMeals.inDietMeals.length,
+      groupedMeals.outDietMeals.length
+    );
 
     const statistics: IStatistics = {
-      percentage: 0,
+      percentage: Math.floor(handlePercentageCalculation.percentage),
+      percentageStatus: handlePercentageCalculation.percentageStatus,
       bestMealSequence: 0,
       mealCounter: meals.length,
-      inDietMeals: inDietMeals.length,
-      outDietMeals: outDietMeals.length,
+      inDietMeals: groupedMeals.inDietMeals.length,
+      outDietMeals: groupedMeals.outDietMeals.length,
     };
 
     return statistics;

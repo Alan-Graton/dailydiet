@@ -1,5 +1,4 @@
 import React from "react";
-import { useIsFocused } from "@react-navigation/native";
 
 import { Stack } from "expo-router";
 
@@ -14,7 +13,6 @@ import * as S from "./styles";
 import { useTheme } from "styled-components/native";
 
 export default function Statistics() {
-  const isFocused = useIsFocused();
   const { COLORS } = useTheme();
 
   const { statistics } = React.useContext(StatistcsContext);
@@ -24,7 +22,12 @@ export default function Statistics() {
       <Stack.Screen
         options={{
           headerTintColor: COLORS.GRAY_700,
-          header: () => <Header percentage={`${statistics.percentage}%`} />,
+          header: () => (
+            <Header
+              percentage={`${statistics.percentage}%`}
+              status={statistics.percentageStatus}
+            />
+          ),
         }}
       />
       <S.Title>Estatísticas gerais</S.Title>

@@ -1,12 +1,15 @@
 import { useRouter } from "expo-router";
 
+import { IFeedback } from "@/interfaces";
+
 import * as S from "./styles";
 
 type Props = {
   percentage: string;
+  status: IFeedback;
 };
 
-export function Header({ percentage }: Props) {
+export function Header({ percentage, status = "SUCCESS" }: Props) {
   const navigation = useRouter();
 
   function handleGoBack() {
@@ -16,9 +19,9 @@ export function Header({ percentage }: Props) {
   }
 
   return (
-    <S.Container type="SUCCESS">
+    <S.Container type={status}>
       <S.BackButton onPress={() => handleGoBack()}>
-        <S.BackIcon type="SUCCESS" />
+        <S.BackIcon type={status} />
       </S.BackButton>
       <S.PercentageTitle>{percentage}</S.PercentageTitle>
       <S.SubTitle>das refeições dentro da dieta</S.SubTitle>

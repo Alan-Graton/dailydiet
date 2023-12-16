@@ -2,10 +2,10 @@ import styled, { css } from "styled-components/native";
 
 import { ArrowLeft } from "phosphor-react-native";
 
-type BackIconStyleProps = "SUCCESS" | "ERORR";
+import { IFeedback } from "@/interfaces";
 
 interface Props {
-  type?: BackIconStyleProps;
+  type?: IFeedback;
 }
 
 export const Container = styled.View<Props>`
@@ -19,12 +19,12 @@ export const Container = styled.View<Props>`
 `;
 
 export const BackButton = styled.TouchableOpacity`
-    padding: 5px;
+  padding: 5px;
 
-    position: relative;
-    align-self: flex-start;
+  position: relative;
+  align-self: flex-start;
 
-    margin-left: 12px;
+  margin-left: 12px;
 `;
 
 export const BackIcon = styled(ArrowLeft).attrs<Props>(({ theme, type }) => ({

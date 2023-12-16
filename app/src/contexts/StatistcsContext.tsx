@@ -2,16 +2,18 @@ import React from "react";
 
 import { getStatistics } from "@/storage/getStatistics";
 import { IMealDTO } from "@/storage/config/MealDTO";
-import { setStatusBarStyle } from "expo-status-bar";
+
+import { IFeedback } from "@/interfaces";
 
 const DEFAULT_VALUE = {
   statistics: {
     percentage: 0,
+    percentageStatus: "SUCCESS",
     bestMealSequence: 0,
     mealCounter: 0,
     inDietMeals: 0,
     outDietMeals: 0,
-  },
+  } as IStatistics,
   setStatistics: () => {},
   fetchStatistics: (meals: IMealDTO[]) => {},
 };
@@ -47,6 +49,7 @@ export function StatisticsProvider({
 
 export interface IStatistics {
   percentage: number;
+  percentageStatus: IFeedback;
   bestMealSequence: number;
   mealCounter: number;
   inDietMeals: number;

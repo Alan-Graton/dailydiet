@@ -28,6 +28,11 @@ export default function Home() {
   const { setSelectedMeal } = useContext(MealContext);
   const { statistics, fetchStatistics } = useContext(StatistcsContext);
 
+  const HEADER_TITLE =
+    statistics.percentageStatus === "SUCCESS"
+      ? "das refeições dentro da dieta"
+      : "das refeições fora da dieta";
+
   const [loading, setLoading] = useState<boolean>(false);
   const [meals, setMeals] = useState<IMealDTO[]>([]);
 
@@ -53,7 +58,8 @@ export default function Home() {
     <S.Container>
       <StatisticsCard
         title={`${statistics.percentage}%`}
-        subtitle="das refeições dentro da dieta"
+        type={statistics.percentageStatus}
+        subtitle={HEADER_TITLE}
         onPress={() => navigation.push("/(Statistics)")}
       />
       <S.ActionForm>

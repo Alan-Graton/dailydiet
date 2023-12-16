@@ -3,14 +3,15 @@ import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { IFeedback } from "@/interfaces";
 
-export type StatisticsButtonStyleProps = {
-  type?: "SUCCESS" | "ERROR";
-};
+export interface StatisticsButtonStyleProps {
+  type?: IFeedback;
+}
 
-export const StatisticsButton = styled(
-  TouchableOpacity
-)<StatisticsButtonStyleProps>`
+type Props = StatisticsButtonStyleProps;
+
+export const StatisticsButton = styled(TouchableOpacity)<Props>`
   background-color: ${({ theme, type }) => {
     if (type === "SUCCESS") return theme.COLORS.GREEN_100;
     if (type === "ERROR") return theme.COLORS.RED_100;
@@ -39,10 +40,12 @@ export const SubTitle = styled.Text`
   `}
 `;
 
-export const OpenIcon = styled(ArrowUpRight).attrs(({ theme }) => ({
-  size: 24,
-  color: theme.COLORS.GREEN_300,
-}))`
+export const OpenIcon = styled(ArrowUpRight).attrs<Props>(
+  ({ theme, type }) => ({
+    size: 24,
+    color: type === "SUCCESS" ? theme.COLORS.GREEN_300 : theme.COLORS.RED_300,
+  })
+)`
   position: relative;
   align-self: flex-end;
 `;
