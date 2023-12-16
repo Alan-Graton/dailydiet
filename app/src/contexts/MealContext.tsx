@@ -1,22 +1,19 @@
 import React from "react";
 
-/** TODO:
- * [feedback] type are not working properly...
- */
+import { IFeedback } from "@/interfaces";
+import { IMealDTO } from "@/storage/config/MealDTO";
 
 export type SelectedMealType = {
   date: string;
   time: string;
   name: string;
   description: string;
-  feedback: "SUCCESS" | "ERROR" | string;
+  feedback: IFeedback;
 };
 
 interface PropsMealContext {
-  selectedMeal: SelectedMealType | null;
-  setSelectedMeal: React.Dispatch<
-    React.SetStateAction<SelectedMealType | null>
-  >;
+  selectedMeal: IMealDTO | null;
+  setSelectedMeal: React.Dispatch<React.SetStateAction<IMealDTO | null>>;
 }
 
 const DEFAULT_VALUE = {
@@ -26,7 +23,7 @@ const DEFAULT_VALUE = {
     name: "",
     description: "",
     feedback: "SUCCESS",
-  },
+  } as IMealDTO,
   setSelectedMeal: () => {},
 };
 
@@ -37,8 +34,9 @@ interface Props {
 }
 
 export function MealProvider({ children }: Props) {
-  const [selectedMeal, setSelectedMeal] =
-    React.useState<SelectedMealType | null>(DEFAULT_VALUE.selectedMeal);
+  const [selectedMeal, setSelectedMeal] = React.useState<IMealDTO | null>(
+    DEFAULT_VALUE.selectedMeal
+  );
 
   return (
     <MealContext.Provider value={{ selectedMeal, setSelectedMeal }}>

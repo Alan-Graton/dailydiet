@@ -29,7 +29,11 @@ export function Content() {
 
   const { selectedMeal } = React.useContext(MealContext);
 
-  const [selected, setSelected] = useState<IFeedback | null>(null);
+  const hasSelectedMeal = selectedMeal && true;
+
+  const [selected, setSelected] = useState<IFeedback | null>(
+    hasSelectedMeal ? selectedMeal.feedback : null
+  );
 
   const [date, setDate] = useState<Date>(new Date());
   const [showDate, setShowDate] = useState<boolean>(false);
@@ -38,8 +42,6 @@ export function Content() {
   const [showTime, setShowTime] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
-
-  const hasSelectedMeal = selectedMeal && true;
 
   const DEFAULT_MEAL: IMealDTO = {
     date: "",
@@ -53,9 +55,8 @@ export function Content() {
     ? "Salvar alterações"
     : "Cadastrar refeição";
 
-  // TODO: Refac these types pleaseeeee
   const [meal, setMeal] = useState<IMealDTO>(
-    hasSelectedMeal ? (selectedMeal as IMealDTO) : DEFAULT_MEAL
+    hasSelectedMeal ? selectedMeal : DEFAULT_MEAL
   );
 
   // TODO: Após salvar, alterar, redirecionar para a tela de Feedback
@@ -82,21 +83,20 @@ export function Content() {
     }
   }
 
-  // TODO: Por hora, mostrar os dados de [selectedMeal] como Placeholder
   return (
     <S.Form>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Nome</S.TextInputLabel>
         <AppTextInput
           onChangeText={(text) => handleSetValues("name", text, setMeal)}
-          value={selectedMeal ? selectedMeal.name : meal.name}
+          value={meal.name}
         />
       </View>
       <View style={{ width: "100%" }}>
         <S.TextInputLabel>Descrição</S.TextInputLabel>
         <AppTextArea
           onChangeText={(text) => handleSetValues("description", text, setMeal)}
-          value={selectedMeal ? selectedMeal.description : meal.description}
+          value={meal.description}
         />
       </View>
       <S.DateTimeContainer>
@@ -111,9 +111,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowDate(true)}
-            value={
-              selectedMeal ? selectedMeal.date : TransformDateTime(date, "date")
-            }
+            value={TransformDateTime(date, "date")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -128,9 +126,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowTime(true)}
-            value={
-              selectedMeal ? selectedMeal.time : TransformDateTime(time, "time")
-            }
+            value={selectedMeal ? meal.time : TransformDateTime(time, "time")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -141,13 +137,13 @@ export function Content() {
           <AppSelect
             title="Sim"
             onPress={() => handleFeedback("SUCCESS", setSelected, setMeal)}
-            selected={selectedMeal ? selectedMeal.feedback : selected}
+            selected={selected}
           />
           <AppSelect
             title="Não"
             type="ERROR"
             onPress={() => handleFeedback("ERROR", setSelected, setMeal)}
-            selected={selectedMeal ? selectedMeal.feedback : selected}
+            selected={selected}
           />
         </S.FeedbackForm>
       </S.FeedbackContainer>

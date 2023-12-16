@@ -4,12 +4,12 @@ import { Text } from "react-native";
 
 import { MealContext } from "@/contexts/MealContext";
 
-import { IMealList } from "@/interfaces";
+import { IMealDTO } from "@/storage/config/MealDTO";
 
 import * as S from "./styles";
 
 type Props = {
-  item: IMealList;
+  item: IMealDTO;
 };
 
 /** TODO:
@@ -22,7 +22,7 @@ export function MealCard({ item }: Props) {
 
   const { setSelectedMeal } = React.useContext(MealContext);
 
-  function handleCardPress(pressedItem: IMealList) {
+  function handleCardPress(pressedItem: IMealDTO) {
     setSelectedMeal((prevState) => (prevState = pressedItem));
     navigation.push("/(MealDetails)");
   }

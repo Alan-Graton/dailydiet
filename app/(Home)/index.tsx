@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
+import { IMealDTO } from "@/storage/config/MealDTO";
 import { getAllMeals } from "@/storage/getAllMeals";
 
 import { AppIconButton } from "@/components/AppIconButton";
@@ -14,8 +15,6 @@ import { AppLoader } from "@/components/AppLoader";
 
 import { MealCard } from "./components/MealCard";
 import { StatisticsCard } from "./components/StatisticsCard";
-
-import { IMealList } from "@/interfaces";
 
 import * as S from "./styles";
 import { useTheme } from "styled-components/native";
@@ -28,7 +27,7 @@ export default function Home() {
   const { selectedMeal, setSelectedMeal } = React.useContext(MealContext);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [meals, setMeals] = useState<IMealList[]>([]);
+  const [meals, setMeals] = useState<IMealDTO[]>([]);
 
   React.useEffect(() => {
     async function fetchMeals() {
