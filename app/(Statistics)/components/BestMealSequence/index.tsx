@@ -1,9 +1,13 @@
 import * as S from "./styles";
 
-export function BestMealSequence() {
+interface Props {
+  title: number;
+}
+
+export function BestMealSequence({ title }: Props) {
   return (
     <S.Container>
-      <S.TitleCounter>22</S.TitleCounter>
+      <S.TitleCounter>{title}</S.TitleCounter>
       <S.SubTitle>melhor sequência de pratos dentro da dieta</S.SubTitle>
     </S.Container>
   );

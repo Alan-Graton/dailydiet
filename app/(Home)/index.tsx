@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { MealContext } from "@/contexts/MealContext";
+import { StatistcsContext } from "@/contexts/StatistcsContext";
 
 import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
@@ -24,7 +25,8 @@ export default function Home() {
   const navigation = useRouter();
   const { COLORS } = useTheme();
 
-  const { selectedMeal, setSelectedMeal } = React.useContext(MealContext);
+  const { setSelectedMeal } = useContext(MealContext);
+  const { statistics, fetchStatistics } = useContext(StatistcsContext);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [meals, setMeals] = useState<IMealDTO[]>([]);
@@ -34,6 +36,8 @@ export default function Home() {
       setLoading(true);
       const response = await getAllMeals();
       if (!response) return;
+
+      fetchStatistics(response);
 
       setMeals((prevState) => (prevState = response));
       setLoading(false);
@@ -48,7 +52,7 @@ export default function Home() {
   return (
     <S.Container>
       <StatisticsCard
-        title="90,86%"
+        title={`${statistics.percentage}%`}
         subtitle="das refeições dentro da dieta"
         onPress={() => navigation.push("/(Statistics)")}
       />

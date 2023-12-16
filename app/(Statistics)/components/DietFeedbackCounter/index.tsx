@@ -6,7 +6,7 @@ import {
 import * as S from "./styles";
 
 type Props = {
-  title: string;
+  title: number;
   type?: S.ContainerStyleProps;
 };
 

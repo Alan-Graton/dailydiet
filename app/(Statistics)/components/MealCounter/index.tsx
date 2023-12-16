@@ -1,9 +1,13 @@
 import * as S from "./styles";
 
-export function MealCounter() {
+interface Props {
+  title: number;
+}
+
+export function MealCounter({ title }: Props) {
   return (
     <S.Container>
-      <S.TitleCounter>109</S.TitleCounter>
+      <S.TitleCounter>{title}</S.TitleCounter>
       <S.SubTitle>refeições registradas</S.SubTitle>
     </S.Container>
   );
