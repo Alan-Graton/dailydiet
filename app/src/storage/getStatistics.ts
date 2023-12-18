@@ -3,6 +3,7 @@ import { IMealDTO } from "./config/MealDTO";
 
 import { IStatistics } from "@/contexts/StatistcsContext";
 import { CalculateMealsStatusPercentage } from "@/utils/CalculateMealsStatusPercentage";
+import { HandleBestInDietMeals } from "@/utils/HandleBestInDietMeals";
 
 export function getStatistics(meals: IMealDTO[]): IStatistics | null {
   try {
@@ -14,10 +15,12 @@ export function getStatistics(meals: IMealDTO[]): IStatistics | null {
       groupedMeals.outDietMeals.length
     );
 
+    const handleBestSequence = HandleBestInDietMeals(meals);
+
     const statistics: IStatistics = {
       percentage: Math.floor(handlePercentageCalculation.percentage),
       percentageStatus: handlePercentageCalculation.percentageStatus,
-      bestMealSequence: 0,
+      bestMealSequence: handleBestSequence.bestSequence,
       mealCounter: meals.length,
       inDietMeals: groupedMeals.inDietMeals.length,
       outDietMeals: groupedMeals.outDietMeals.length,
