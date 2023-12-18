@@ -1,7 +1,26 @@
-export async function deleteMeal() {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { IMealDTO } from "./config/MealDTO";
+import { StorageEntity } from "./config/StorageConfig";
+
+import { getAllMeals } from "./getAllMeals";
+
+export async function deleteMeal(meal: IMealDTO): Promise<void> {
   try {
-    console.log("\n\n[deleteMeal] Running...");
+    const allMeals = await getAllMeals();
+
+    if (!allMeals) return;
+
+    const persistCreatedMeals = allMeals.filter(
+      (meals) => meals.name !== meal.name
+    );
+
+    await AsyncStorage.setItem(
+      StorageEntity,
+      JSON.stringify(persistCreatedMeals)
+    );
   } catch (e) {
     console.error("\n\n[deleteMeal] Error: ", e);
+    return;
   }
 }
