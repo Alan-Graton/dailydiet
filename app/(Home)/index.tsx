@@ -4,7 +4,7 @@ import { MealContext } from "@/contexts/MealContext";
 import { StatistcsContext } from "@/contexts/StatistcsContext";
 
 import { useRouter } from "expo-router";
-import { FlatList } from "react-native";
+import { SectionList } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
 import { IMealDTO } from "@/storage/config/MealDTO";
@@ -16,6 +16,8 @@ import { AppLoader } from "@/components/AppLoader";
 
 import { MealCard } from "./components/MealCard";
 import { StatisticsCard } from "./components/StatisticsCard";
+
+import { CreateSectionListData } from "@/utils/CreateSectionListData";
 
 import * as S from "./styles";
 import { useTheme } from "styled-components/native";
@@ -72,19 +74,17 @@ export default function Home() {
         />
       </S.ActionForm>
 
-      <FlatList
-        data={meals}
-        keyExtractor={(item) => item?.name}
-        renderItem={({ item }) => (
-          <>
-            <AppLoader loading={loading} />
-            {!loading && <MealCard item={item} />}
-          </>
+      <SectionList
+        sections={CreateSectionListData(meals)}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => <>{!loading && <MealCard item={item} />}</>}
+        renderSectionHeader={({ section: { title } }) => (
+          <S.SectionListTitle>{title}</S.SectionListTitle>
         )}
         ListEmptyComponent={() => (
           <AppEmptyList
             title="Nenhuma refeição"
-            subtitle="Que tal cadastrar uma agora?"
+            subtitle="Que tal cadastra uma agora?"
           />
         )}
       />

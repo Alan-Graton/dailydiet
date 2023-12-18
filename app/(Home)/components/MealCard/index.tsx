@@ -12,11 +12,6 @@ type Props = {
   item: IMealDTO;
 };
 
-/** TODO:
- * Refeições com datas iguais devem estar agrupadas
- *
- * Usar o Context dentro desse component ou em volta do seu pai?
- */
 export function MealCard({ item }: Props) {
   const navigation = useRouter();
 
@@ -34,7 +29,6 @@ export function MealCard({ item }: Props) {
         justifyContent: "center",
       }}
     >
-      <S.DateTitle>{item?.date}</S.DateTitle>
       <S.Card onPress={() => handleCardPress(item)}>
         <S.CardContent>
           <S.TimeTitle>{item?.time}</S.TimeTitle>

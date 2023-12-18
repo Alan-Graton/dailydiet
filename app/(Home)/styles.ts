@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -35,4 +35,14 @@ export const ProfilePic = styled.Image`
   border-radius: 50px;
   border-color: ${({ theme }) => theme.COLORS.GRAY_700};
   border-width: 2px;
+`;
+
+export const SectionListTitle = styled.Text`
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.XMD}px;
+    color: ${theme.COLORS.GRAY_700};
+  `}
+
+  font-weight: bold;
+  margin-top: 5%;
 `;

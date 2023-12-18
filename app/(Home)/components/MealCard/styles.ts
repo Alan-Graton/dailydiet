@@ -35,19 +35,6 @@ export const CardContent = styled.View`
   gap: 10px;
 `;
 
-export const DateTitle = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.COLORS.GRAY_700};
-    font-size: ${theme.FONT_SIZE.XMD}px;
-  `}
-
-  align-self: flex-start;
-
-  font-weight: bold;
-
-  margin-bottom: 10px;
-`;
-
 export const TimeTitle = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_700};
