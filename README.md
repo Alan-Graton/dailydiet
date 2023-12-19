@@ -2,7 +2,7 @@
 
 ## Description
 
-Desafio de Finalização de Módulo do curso React Native - Rocketseat Ignite
+In this app, the use can register their meals and set them as **in/out the diet**. In the Home it's possible to see your meal list and some statistics.
 
 
 ## TODO
