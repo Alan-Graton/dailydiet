@@ -1,5 +1,5 @@
 import { IMealDTO } from "@/storage/config/MealDTO";
-import { TransformDateTime } from "../transformDate";
+import { transformDateTime } from "../transformDate";
 
 type IMealForm = "date" | "time" | "name" | "description" | "feedback";
 
@@ -10,7 +10,7 @@ export function handleSetValues(
 ) {
   const handleFieldValue =
     field === "date" || field === "time"
-      ? TransformDateTime(value as Date, field)
+      ? transformDateTime(value as Date, field)
       : value;
 
   setMeal((prevState) => ({

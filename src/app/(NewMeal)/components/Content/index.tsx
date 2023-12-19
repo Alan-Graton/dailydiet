@@ -19,7 +19,7 @@ import { putMeal } from "@/storage/putMeal";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { TransformDateTime } from "@/utils/transformDate";
+import { transformDateTime } from "@/utils/transformDate";
 import { handleFeedback } from "@/utils/NewMeal/handleFeedback";
 import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
 
@@ -117,7 +117,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowDate(true)}
-            value={TransformDateTime(date, "date")}
+            value={transformDateTime(date, "date")}
             caretHidden
           />
         </S.DateTimeForm>
@@ -132,7 +132,7 @@ export function Content() {
           )}
           <AppTextInput
             onPressIn={() => setShowTime(true)}
-            value={selectedMeal ? meal.time : TransformDateTime(time, "time")}
+            value={selectedMeal ? meal.time : transformDateTime(time, "time")}
             caretHidden
           />
         </S.DateTimeForm>

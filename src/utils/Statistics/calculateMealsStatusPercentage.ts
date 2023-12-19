@@ -5,7 +5,7 @@ interface ISatisticsCalculation {
   percentageStatus: IFeedback;
 }
 
-export function CalculateMealsStatusPercentage(
+export function calculateMealsStatusPercentage(
   mealsQnt: number,
   inDietMealsQnt: number,
   outDietMealsQnt: number

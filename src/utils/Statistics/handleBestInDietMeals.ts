@@ -5,7 +5,7 @@ interface IBestMealSequence {
   bestSequence: number;
 }
 
-export function HandleBestInDietMeals(meals: IMealDTO[]): IBestMealSequence {
+export function handleBestInDietMeals(meals: IMealDTO[]): IBestMealSequence {
   const reduceSequences = meals.reduce(
     (acc, meal) => {
       if (meal.feedback === "SUCCESS") {

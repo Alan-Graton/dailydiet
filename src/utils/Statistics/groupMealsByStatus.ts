@@ -1,6 +1,6 @@
 import { IMealDTO } from "@/storage/config/MealDTO";
 
-export function GroupMealsByStatus(meals: IMealDTO[]) {
+export function groupMealsByStatus(meals: IMealDTO[]) {
   const inDietMeals = meals.flatMap((meal) => {
     return meal.feedback === "SUCCESS" ? [meal] : [];
   });
