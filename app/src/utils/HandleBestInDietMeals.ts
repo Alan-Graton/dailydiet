@@ -1,11 +1,11 @@
 import { IMealDTO } from "@/storage/config/MealDTO";
 
-interface IMealsSequences {
+interface IBestMealSequence {
   sequences: Array<number>;
   bestSequence: number;
 }
 
-export function HandleBestInDietMeals(meals: IMealDTO[]): IMealsSequences {
+export function HandleBestInDietMeals(meals: IMealDTO[]): IBestMealSequence {
   const reduceSequences = meals.reduce(
     (acc, meal) => {
       if (meal.feedback === "SUCCESS") {
@@ -17,10 +17,14 @@ export function HandleBestInDietMeals(meals: IMealDTO[]): IMealsSequences {
 
       return acc;
     },
-    { sequences: [], bestSequence: 0 } as IMealsSequences
+    { sequences: [], bestSequence: 0 } as IBestMealSequence
   );
 
   reduceSequences.sequences.push(reduceSequences.bestSequence);
+  reduceSequences.bestSequence = Math.max(...reduceSequences.sequences);
 
-  return reduceSequences;
+  return {
+    sequences: reduceSequences.sequences,
+    bestSequence: reduceSequences.bestSequence,
+  };
 }

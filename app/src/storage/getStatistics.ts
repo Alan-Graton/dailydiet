@@ -15,12 +15,12 @@ export function getStatistics(meals: IMealDTO[]): IStatistics | null {
       groupedMeals.outDietMeals.length
     );
 
-    const handleBestSequence = HandleBestInDietMeals(meals);
+    const { bestSequence } = HandleBestInDietMeals(meals);
 
     const statistics: IStatistics = {
       percentage: Math.floor(handlePercentageCalculation.percentage),
       percentageStatus: handlePercentageCalculation.percentageStatus,
-      bestMealSequence: handleBestSequence.bestSequence,
+      bestMealSequence: bestSequence,
       mealCounter: meals.length,
       inDietMeals: groupedMeals.inDietMeals.length,
       outDietMeals: groupedMeals.outDietMeals.length,
