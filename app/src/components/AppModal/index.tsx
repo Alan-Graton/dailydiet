@@ -1,7 +1,9 @@
-import * as S from "./styles";
-
 import { Modal } from "react-native-paper";
+
 import { AppButton } from "../AppButton";
+
+import * as S from "./styles";
+import { AppLoader } from "../AppLoader";
 
 type Props = {
   visible: boolean;
@@ -10,6 +12,7 @@ type Props = {
   cancelTitle: string;
   submitTitle: string;
   handleOnSubmit: () => void;
+  loading: boolean;
 };
 
 export function AppModal({
@@ -19,6 +22,7 @@ export function AppModal({
   cancelTitle,
   submitTitle,
   handleOnSubmit,
+  loading = false,
   ...rest
 }: Props) {
   return (
@@ -38,7 +42,10 @@ export function AppModal({
             outline
             onPress={() => setVisible(false)}
           />
-          <AppButton title={submitTitle} onPress={handleOnSubmit} />
+          <AppLoader loading={loading} />
+          {!loading && (
+            <AppButton title={submitTitle} onPress={handleOnSubmit} />
+          )}
         </S.Actions>
       </S.ModalContent>
     </Modal>

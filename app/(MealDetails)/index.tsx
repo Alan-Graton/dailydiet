@@ -7,7 +7,6 @@ import { AppModal } from "@/components/AppModal";
 
 import { deleteMeal } from "@/storage/deleteMeal";
 
-// Screen Components
 import { Header } from "./components/Header";
 import { Content } from "./components/Content";
 import { Footer } from "./components/Footer";
@@ -19,13 +18,16 @@ export default function MealDetails() {
 
   const { selectedMeal } = React.useContext(MealContext);
 
-  const [deleteModal, setDeleteModal] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = React.useState<boolean>(false);
 
   async function onSubmit() {
     if (selectedMeal) {
+      setLoading(true);
       await deleteMeal(selectedMeal);
       setDeleteModal(false);
       navigation.push("/(Home)");
+      setLoading(false);
     }
   }
 
@@ -42,6 +44,7 @@ export default function MealDetails() {
           cancelTitle="Cancelar"
           submitTitle="Sim, excluir"
           handleOnSubmit={onSubmit}
+          loading={loading}
         />
       </S.Container>
     </>
