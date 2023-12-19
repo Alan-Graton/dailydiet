@@ -61,7 +61,7 @@ export default function Home() {
         type={statistics.percentageStatus}
         subtitle={HEADER_TITLE}
         onPress={() => {
-          router.push("/(DietFeedback)/ERROR");
+          router.push("/(Statistics)/");
         }}
       />
       <S.ActionForm>
@@ -74,25 +74,23 @@ export default function Home() {
         />
       </S.ActionForm>
 
-      <SectionList
-        sections={SectionListFactory(meals)}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <>
-            <AppLoader loading={loading} />
-            {!loading && <MealCard item={item} />}
-          </>
-        )}
-        renderSectionHeader={({ section: { title } }) => (
-          <S.SectionListTitle>{title}</S.SectionListTitle>
-        )}
-        ListEmptyComponent={() => (
-          <AppEmptyList
-            title="Nenhuma refeição"
-            subtitle="Que tal cadastra uma agora?"
-          />
-        )}
-      />
+      <AppLoader loading={loading} />
+      {!loading && (
+        <SectionList
+          sections={SectionListFactory(meals)}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => <MealCard item={item} />}
+          renderSectionHeader={({ section: { title } }) => (
+            <S.SectionListTitle>{title}</S.SectionListTitle>
+          )}
+          ListEmptyComponent={() => (
+            <AppEmptyList
+              title="Nenhuma refeição"
+              subtitle="Que tal cadastra uma agora?"
+            />
+          )}
+        />
+      )}
     </S.Container>
   );
 }
