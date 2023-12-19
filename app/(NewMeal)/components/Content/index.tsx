@@ -66,7 +66,6 @@ export function Content() {
   // TODO: Após salvar, alterar, redirecionar para a tela de Feedback de acordo com o status da refeição
   async function handleSubmitMeal() {
     if (!hasSelectedMeal) {
-      console.log("\n\n[handleSubmitMeal] POST: ", meal);
       await postMeal(meal, setLoading);
       navigation.push(`/(DietFeedback)/`);
       return;
