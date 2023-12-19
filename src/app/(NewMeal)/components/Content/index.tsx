@@ -63,19 +63,18 @@ export function Content() {
     hasSelectedMeal ? selectedMeal : DEFAULT_MEAL
   );
 
-  // TODO: Após salvar, alterar, redirecionar para a tela de Feedback de acordo com o status da refeição
   async function handleSubmitMeal() {
     setLoading(true);
     if (!hasSelectedMeal) {
       await postMeal(meal);
       setLoading(false);
-      navigation.push(`/(DietFeedback)/`);
+      navigation.push(`/(DietFeedback)/${meal.feedback}`);
       return;
     }
 
     setLoading(false);
     await putMeal(meal);
-    navigation.push(`/(DietFeedback)/`);
+    navigation.push(`/(DietFeedback)/${meal.feedback}`);
   }
 
   function handleOnChageDateTime(event: any, selectedValue: any) {
