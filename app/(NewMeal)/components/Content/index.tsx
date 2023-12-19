@@ -16,6 +16,9 @@ import { IMealDTO } from "@/storage/config/MealDTO";
 import { postMeal } from "@/storage/postMeal";
 import { putMeal } from "@/storage/putMeal";
 
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+
 import { TransformDateTime } from "@/utils/TransformDate";
 import { handleFeedback } from "@/utils/NewMeal/handleFeedback";
 import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
@@ -44,6 +47,7 @@ export function Content() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const DEFAULT_MEAL: IMealDTO = {
+    id: uuidv4(),
     date: "",
     time: "",
     name: "",
@@ -59,9 +63,10 @@ export function Content() {
     hasSelectedMeal ? selectedMeal : DEFAULT_MEAL
   );
 
-  // TODO: Após salvar, alterar, redirecionar para a tela de Feedback
+  // TODO: Após salvar, alterar, redirecionar para a tela de Feedback de acordo com o status da refeição
   async function handleSubmitMeal() {
     if (!hasSelectedMeal) {
+      console.log("\n\n[handleSubmitMeal] POST: ", meal);
       await postMeal(meal, setLoading);
       navigation.push(`/(DietFeedback)/`);
       return;

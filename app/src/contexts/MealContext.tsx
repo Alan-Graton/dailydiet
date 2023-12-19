@@ -4,6 +4,7 @@ import { IFeedback } from "@/interfaces";
 import { IMealDTO } from "@/storage/config/MealDTO";
 
 export type SelectedMealType = {
+  id: string;
   date: string;
   time: string;
   name: string;
@@ -18,6 +19,7 @@ interface PropsMealContext {
 
 const DEFAULT_VALUE = {
   selectedMeal: {
+    id: "",
     date: "",
     time: "",
     name: "",
