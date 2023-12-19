@@ -1,21 +1,6 @@
 import React from "react";
 
-import { IFeedback } from "@/interfaces";
 import { IMealDTO } from "@/storage/config/MealDTO";
-
-export type SelectedMealType = {
-  id: string;
-  date: string;
-  time: string;
-  name: string;
-  description: string;
-  feedback: IFeedback;
-};
-
-interface PropsMealContext {
-  selectedMeal: IMealDTO | null;
-  setSelectedMeal: React.Dispatch<React.SetStateAction<IMealDTO | null>>;
-}
 
 const DEFAULT_VALUE = {
   selectedMeal: {
@@ -29,11 +14,7 @@ const DEFAULT_VALUE = {
   setSelectedMeal: () => {},
 };
 
-export const MealContext = React.createContext<PropsMealContext>(DEFAULT_VALUE);
-
-interface Props {
-  children: React.ReactNode;
-}
+export const MealContext = React.createContext<IMealContext>(DEFAULT_VALUE);
 
 export function MealProvider({ children }: Props) {
   const [selectedMeal, setSelectedMeal] = React.useState<IMealDTO | null>(
@@ -45,4 +26,12 @@ export function MealProvider({ children }: Props) {
       {children}
     </MealContext.Provider>
   );
+}
+
+interface IMealContext {
+  selectedMeal: IMealDTO | null;
+  setSelectedMeal: React.Dispatch<React.SetStateAction<IMealDTO | null>>;
+}
+interface Props {
+  children: React.ReactNode;
 }

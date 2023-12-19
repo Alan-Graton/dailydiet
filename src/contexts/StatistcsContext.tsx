@@ -19,13 +19,9 @@ const DEFAULT_VALUE = {
 };
 
 export const StatistcsContext =
-  React.createContext<PropsStatisticsContext>(DEFAULT_VALUE);
+  React.createContext<IStatisticsContext>(DEFAULT_VALUE);
 
-export function StatisticsProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function StatisticsProvider({ children }: Props) {
   const [statistics, setStatistics] = React.useState<IStatistics>(
     DEFAULT_VALUE.statistics
   );
@@ -47,6 +43,10 @@ export function StatisticsProvider({
   );
 }
 
+export interface Props {
+  children: React.ReactNode;
+}
+
 export interface IStatistics {
   percentage: number;
   percentageStatus: IFeedback;
@@ -56,7 +56,7 @@ export interface IStatistics {
   outDietMeals: number;
 }
 
-interface PropsStatisticsContext {
+interface IStatisticsContext {
   statistics: IStatistics;
   setStatistics: React.Dispatch<React.SetStateAction<IStatistics>>;
   fetchStatistics: (meals: IMealDTO[]) => void;
