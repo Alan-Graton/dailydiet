@@ -27,7 +27,6 @@ export const Logo = styled.Image`
   height: 35px;
 `;
 
-// FIXME: "border-color" not working with Styled Components
 export const ProfilePic = styled.Image`
   width: 50px;
   height: 50px;

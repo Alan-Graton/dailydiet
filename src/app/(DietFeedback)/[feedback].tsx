@@ -1,8 +1,4 @@
-import {
-  router,
-  useGlobalSearchParams,
-  useLocalSearchParams,
-} from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import { AppButton } from "@/components/AppButton";
 
 import { SuccessSubTitle, SuccessTitle } from "@/constants/SuccessDietFeedback";
@@ -15,8 +11,6 @@ import * as S from "./styles";
 
 import { IFeedback } from "@/interfaces";
 
-// TODO: Use Route params to pass feedback status
-// TODO: Apply boldness to middle texts the right way, please
 export default function DietFeedback() {
   const { feedback }: { feedback: IFeedback } = useGlobalSearchParams();
 

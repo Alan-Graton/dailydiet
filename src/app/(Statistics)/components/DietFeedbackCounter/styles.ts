@@ -1,6 +1,8 @@
 import styled from "styled-components/native";
 
-export type ContainerStyleProps = "SUCCESS" | "ERROR";
+import { IFeedback } from "@/interfaces";
+
+export type ContainerStyleProps = IFeedback;
 
 interface Props {
   type?: ContainerStyleProps;
@@ -17,7 +19,6 @@ export const Container = styled.View<Props>`
   align-items: center;
   justify-content: space-evenly;
 
-
   width: 150px;
   height: 125px;
 
@@ -30,6 +31,6 @@ export const CounterTitle = styled.Text`
 `;
 
 export const SubTitle = styled.Text`
-font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   text-align: center;
 `;

@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { IMealDTO } from "./config/MealDTO";
 import { StorageEntity } from "./config/StorageConfig";
+
 import { getAllMeals } from "./getAllMeals";
 
 export async function postMeal(meal: IMealDTO): Promise<void> {

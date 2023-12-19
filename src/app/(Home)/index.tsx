@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
+import { router } from "expo-router";
+import { useIsFocused } from "@react-navigation/native";
+import { SectionList } from "react-native";
 
 import { MealContext } from "@/contexts/MealContext";
 import { StatistcsContext } from "@/contexts/StatistcsContext";
-
-import { router, useRouter, useNavigation } from "expo-router";
-import { SectionList } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 
 import { IMealDTO } from "@/storage/config/MealDTO";
 import { getAllMeals } from "@/storage/getAllMeals";
@@ -17,14 +16,13 @@ import { AppLoader } from "@/components/AppLoader";
 import { MealCard } from "./components/MealCard";
 import { StatisticsCard } from "./components/StatisticsCard";
 
-import { CreateSectionListData } from "@/utils/CreateSectionListData";
+import { SectionListFactory } from "@/factories/components/SectionListData.factory";
 
 import * as S from "./styles";
 import { useTheme } from "styled-components/native";
 
 export default function Home() {
   const isFocused = useIsFocused();
-  const navigation = useNavigation();
   const { COLORS } = useTheme();
 
   const { setSelectedMeal } = useContext(MealContext);
@@ -77,7 +75,7 @@ export default function Home() {
       </S.ActionForm>
 
       <SectionList
-        sections={CreateSectionListData(meals)}
+        sections={SectionListFactory(meals)}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
           <>

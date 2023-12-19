@@ -25,6 +25,7 @@ export default function MealDetails() {
     if (selectedMeal) {
       setLoading(true);
       await deleteMeal(selectedMeal);
+
       setDeleteModal(false);
       navigation.push("/(Home)");
       setLoading(false);
