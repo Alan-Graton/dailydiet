@@ -12,7 +12,7 @@ export async function deleteMeal(meal: IMealDTO): Promise<void> {
     if (!allMeals) return;
 
     const persistCreatedMeals = allMeals.filter(
-      (meals) => meals.name !== meal.name
+      (meals) => meals.id !== meal.id
     );
 
     await AsyncStorage.setItem(

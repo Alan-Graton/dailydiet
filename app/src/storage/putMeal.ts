@@ -1,15 +1,25 @@
 import { SelectedMealType } from "@/contexts/MealContext";
 
-export async function putMeal(
-  meal: SelectedMealType,
-  setLoading: (value: React.SetStateAction<boolean>) => void
-) {
+import { getAllMeals } from "./getAllMeals";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StorageEntity } from "./config/StorageConfig";
+
+export async function putMeal(meal: SelectedMealType): Promise<void> {
   try {
-    setLoading(true);
-    console.log("\n\n[putMeal] Updating Meal: ", meal);
+    const allMeals = await getAllMeals();
+
+    if (!allMeals) return;
+
+    const persistCreatedMeals = allMeals.filter((el) => el.id !== meal.id);
+    persistCreatedMeals.push(meal);
+
+    await AsyncStorage.setItem(
+      StorageEntity,
+      JSON.stringify(persistCreatedMeals)
+    );
   } catch (e) {
     console.error("\n\n[putMeal] Error: ", e);
-  } finally {
-    setLoading(false);
+    return;
   }
 }

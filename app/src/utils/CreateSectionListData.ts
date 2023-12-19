@@ -11,8 +11,7 @@ export function CreateSectionListData(array: IMealDTO[]): ISectionListData[] {
       (acc, cur) => {
         const hasSameTitle = acc.find((item) => item.title === cur.date);
         const isDuplicate = hasSameTitle?.data.find(
-          (item) =>
-            item.name === cur.name && item.description === cur.description
+          (item) => item.id === cur.id
         );
 
         if (!hasSameTitle) {
