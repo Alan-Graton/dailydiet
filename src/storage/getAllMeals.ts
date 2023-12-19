@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { StorageEntity } from "./config/StorageConfig";
 import { IMealDTO } from "./config/MealDTO";
 

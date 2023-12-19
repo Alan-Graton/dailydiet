@@ -19,7 +19,7 @@ import { putMeal } from "@/storage/putMeal";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { TransformDateTime } from "@/utils/TransformDate";
+import { TransformDateTime } from "@/utils/transformDate";
 import { handleFeedback } from "@/utils/NewMeal/handleFeedback";
 import { handleSetValues } from "@/utils/NewMeal/handleSetValues";
 

@@ -1,6 +1,6 @@
 import { IFeedback } from "@/interfaces";
 
-interface Return {
+interface ISatisticsCalculation {
   percentage: number;
   percentageStatus: IFeedback;
 }
@@ -9,7 +9,7 @@ export function CalculateMealsStatusPercentage(
   mealsQnt: number,
   inDietMealsQnt: number,
   outDietMealsQnt: number
-): Return {
+): ISatisticsCalculation {
   const inDietPercentage = (inDietMealsQnt / mealsQnt) * 100;
   const outDietPercentage = (outDietMealsQnt / mealsQnt) * 100;
 

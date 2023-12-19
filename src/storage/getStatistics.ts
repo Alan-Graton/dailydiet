@@ -1,9 +1,10 @@
-import { GroupMealsByStatus } from "@/utils/GroupMealsByStatus";
 import { IMealDTO } from "./config/MealDTO";
 
 import { IStatistics } from "@/contexts/StatistcsContext";
-import { CalculateMealsStatusPercentage } from "@/utils/CalculateMealsStatusPercentage";
-import { HandleBestInDietMeals } from "@/utils/HandleBestInDietMeals";
+
+import { CalculateMealsStatusPercentage } from "@/utils/Statistics/calculateMealsStatusPercentage";
+import { HandleBestInDietMeals } from "@/utils/Statistics/handleBestInDietMeals";
+import { GroupMealsByStatus } from "@/utils/Statistics/groupMealsByStatus";
 
 export function getStatistics(meals: IMealDTO[]): IStatistics | null {
   try {

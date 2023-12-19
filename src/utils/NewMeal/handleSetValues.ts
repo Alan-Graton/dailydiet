@@ -1,5 +1,5 @@
 import { IMealDTO } from "@/storage/config/MealDTO";
-import { TransformDateTime } from "../TransformDate";
+import { TransformDateTime } from "../transformDate";
 
 type IMealForm = "date" | "time" | "name" | "description" | "feedback";
 
