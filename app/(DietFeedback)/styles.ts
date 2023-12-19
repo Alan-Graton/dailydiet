@@ -1,27 +1,40 @@
 import styled, { css } from "styled-components/native";
 
-export type TitleStyleProps = "SUCCESS" | "ERROR";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { IFeedback } from "@/interfaces";
+
+export type TitleStyleProps = IFeedback;
 
 interface Props {
   type?: TitleStyleProps;
 }
 
-export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: space-evenly;
+export const Container = styled(SafeAreaView)`
+  justify-content: space-between;
 
   padding: 16px;
+
+  flex: 1;
 
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
-export const FeedbackTexts = styled.View`
+export const Header = styled.View`
   padding: 5px;
 
-  gap: 10px;
-
   align-items: center;
+
+  gap: 10px;
+`;
+
+export const Content = styled.View`
+  align-items: center;
+`;
+
+export const Footer = styled.View`
+  padding: 5px;
+  flex: 0.24;
 `;
 
 export const Title = styled.Text<Props>`
@@ -38,18 +51,10 @@ export const Title = styled.Text<Props>`
 
 export const SubTitle = styled.Text`
   ${({ theme }) => css`
-    font-size: ${theme.FONT_SIZE.XMD}px;
+    font-size: ${theme.FONT_SIZE.MD}px;
   `}
 
   text-align: center;
-`;
-
-export const StrongSubTitle = styled.Text`
-  ${({ theme }) => css`
-    font-size: ${theme.FONT_SIZE.XMD}px;
-  `}
-
-  font-weight: bold;
 `;
 
 export const Image = styled.Image`
