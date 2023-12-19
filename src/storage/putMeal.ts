@@ -1,11 +1,11 @@
-import { SelectedMealType } from "@/contexts/MealContext";
-
 import { getAllMeals } from "./getAllMeals";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StorageEntity } from "./config/StorageConfig";
 
-export async function putMeal(meal: SelectedMealType): Promise<void> {
+import { StorageEntity } from "./config/StorageConfig";
+import { IMealDTO } from "./config/MealDTO";
+
+export async function putMeal(meal: IMealDTO): Promise<void> {
   try {
     const allMeals = await getAllMeals();
 
