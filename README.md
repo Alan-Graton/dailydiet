@@ -9,4 +9,4 @@ Desafio de Finalização de Módulo do curso React Native - Rocketseat Ignite
 - [X] Implementar o UUID
 - [X] Edição de uma refeição
 - [X] Ajustar tela `DietFeedback`
-  - [ ] Usar parâmetros de rota para passar o status da refeição
+  - [X] Usar parâmetros de rota para passar o status da refeição
