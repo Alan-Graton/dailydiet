@@ -6,7 +6,7 @@ In this app, the use can register their meals and set them as **in/out the diet*
 
 
 ## TODO
-- [X] Implementar o UUID
-- [X] Edição de uma refeição
-- [X] Ajustar tela `DietFeedback`
-  - [X] Usar parâmetros de rota para passar o status da refeição
+- [X] Implement UUID
+- [X] Edit a meal
+- [X] UI adjustments in `DietFeedback` screen
+  - [X] Use Route Params in `DietFeedback` screen in order to give the user a better feedback
