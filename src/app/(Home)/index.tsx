@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { MealContext } from "@/contexts/MealContext";
 import { StatistcsContext } from "@/contexts/StatistcsContext";
 
-import { useRouter } from "expo-router";
+import { router, useRouter, useNavigation } from "expo-router";
 import { SectionList } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
@@ -24,7 +24,7 @@ import { useTheme } from "styled-components/native";
 
 export default function Home() {
   const isFocused = useIsFocused();
-  const navigation = useRouter();
+  const navigation = useNavigation();
   const { COLORS } = useTheme();
 
   const { setSelectedMeal } = useContext(MealContext);
@@ -62,7 +62,9 @@ export default function Home() {
         title={`${statistics.percentage}%`}
         type={statistics.percentageStatus}
         subtitle={HEADER_TITLE}
-        onPress={() => navigation.push("/(Statistics)")}
+        onPress={() => {
+          router.push("/(DietFeedback)/ERROR");
+        }}
       />
       <S.ActionForm>
         <S.ActionFormTitle>Refeições</S.ActionFormTitle>
@@ -70,14 +72,19 @@ export default function Home() {
           icon="add"
           title="Nova refeição"
           color={COLORS.WHITE}
-          handleOnPress={() => navigation.push("/(NewMeal)")}
+          handleOnPress={() => router.push("/(NewMeal)")}
         />
       </S.ActionForm>
 
       <SectionList
         sections={CreateSectionListData(meals)}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => <>{!loading && <MealCard item={item} />}</>}
+        renderItem={({ item }) => (
+          <>
+            <AppLoader loading={loading} />
+            {!loading && <MealCard item={item} />}
+          </>
+        )}
         renderSectionHeader={({ section: { title } }) => (
           <S.SectionListTitle>{title}</S.SectionListTitle>
         )}

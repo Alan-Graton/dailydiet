@@ -1,4 +1,8 @@
-import { useRouter } from "expo-router";
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+} from "expo-router";
 import { AppButton } from "@/components/AppButton";
 
 import { SuccessSubTitle, SuccessTitle } from "@/constants/SuccessDietFeedback";
@@ -9,15 +13,12 @@ import BadFeedbackImage from "@/assets/Bad_Feedback.png";
 
 import * as S from "./styles";
 
-type Props = {
-  type?: S.TitleStyleProps;
-  feedback: "SUCCESS" | "ERROR";
-};
+import { IFeedback } from "@/interfaces";
 
 // TODO: Use Route params to pass feedback status
 // TODO: Apply boldness to middle texts the right way, please
-export default function DietFeedback({ feedback = "SUCCESS" }: Props) {
-  const navigation = useRouter();
+export default function DietFeedback() {
+  const { feedback }: { feedback: IFeedback } = useGlobalSearchParams();
 
   return (
     <S.Container>
@@ -37,7 +38,7 @@ export default function DietFeedback({ feedback = "SUCCESS" }: Props) {
       <S.Footer>
         <AppButton
           title="Ir para a página inicial"
-          onPress={() => navigation.push("/(Home)")}
+          onPress={() => router.push("/(Home)/")}
         />
       </S.Footer>
     </S.Container>
